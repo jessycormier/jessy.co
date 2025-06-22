@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ContentCategory } from '@jc/content/content-category.enum';
+import { ContentCategory } from '@jc/content/enum/content-category.enum';
 import { Content } from '@jc/content/interfaces/content.interface';
 import { MetaTagsService } from '@jc/services/meta-tags.service';
 import { MarkdownModule } from 'ngx-markdown';

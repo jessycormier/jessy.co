@@ -3,7 +3,7 @@ import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of, throwError } from 'rxjs';
 import { UnifiedService } from '../../services/unified.service';
-import { ContentCategory } from '../content-category.enum';
+import { ContentCategory } from '../enum/content-category.enum';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({

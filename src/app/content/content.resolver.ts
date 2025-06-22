@@ -1,10 +1,9 @@
-import { inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { inject, PLATFORM_ID } from '@angular/core';
 import { ResolveFn, Router } from '@angular/router';
 import { catchError, of, switchMap } from 'rxjs';
-import { ContentService } from './services/content.service';
 import { CategoryValidationService } from './services/category-validation.service';
-import { isPlatformBrowser } from '@angular/common';
-import { PLATFORM_ID } from '@angular/core';
+import { ContentService } from './services/content.service';
 
 export const contentResolver: ResolveFn<any | null> = (route) => {
   const contentService = inject(ContentService);
@@ -45,7 +44,7 @@ export const contentResolver: ResolveFn<any | null> = (route) => {
               router.navigate(['/error/404']);
             }
             return of(null);
-          })
+          }),
         );
       } else {
         // List request (e.g., /blog)
@@ -56,9 +55,9 @@ export const contentResolver: ResolveFn<any | null> = (route) => {
               router.navigate(['/error/404']);
             }
             return of(null);
-          })
+          }),
         );
       }
-    })
+    }),
   );
 };

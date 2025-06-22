@@ -1,4 +1,4 @@
-import { ContentCategory } from '../content-category.enum';
+import { ContentCategory } from '../enum/content-category.enum';
 import { ContentRouteData } from './content-route-data.interface';
 
 export interface Content extends ContentRouteData {

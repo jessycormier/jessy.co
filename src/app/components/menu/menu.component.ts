@@ -3,7 +3,7 @@ import { LayoutService } from '@jc/services/layout.service';
 import { LinkComponent } from '../link/link.component';
 import { CommonModule } from '@angular/common';
 import { ContentService } from '@jc/content/services/content.service';
-import { ContentCategory } from '@jc/content/content-category.enum';
+import { ContentCategory } from '@jc/content/enum/content-category.enum';
 
 @Component({
   selector: 'app-menu',

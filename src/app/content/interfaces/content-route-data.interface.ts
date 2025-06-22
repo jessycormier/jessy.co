@@ -1,6 +1,6 @@
 import { Data } from '@angular/router';
-import { ContentCategory } from '../content-category.enum';
-import { ContentLayout } from '../content-layout.enum';
+import { ContentCategory } from '../enum/content-category.enum';
+import { ContentLayout } from '../enum/content-layout.enum';
 
 export interface ContentRouteData extends Data {
   layout: ContentLayout;
