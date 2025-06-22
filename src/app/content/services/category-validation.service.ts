@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
-import { ContentCategory } from '../content-category.enum';
+import { ContentCategory } from '../enum/content-category.enum';
 import { CategoryInfo } from '../interfaces/category-info.interface';
 
 @Injectable({

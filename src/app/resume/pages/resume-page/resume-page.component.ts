@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastComponent } from '../../../components/toast/toast.component';
+import { ToastComponent } from '../../../shared/components/toast/toast.component';
 import { ResumeDateRangeComponent } from '../../resume-date-range/resume-date-range.component';
 import { ResumeHelpSectionComponent } from '../../resume-help-section/resume-help-section.component';
 import { ResumeWordComponent } from '../../resume-word/resume-word.component';

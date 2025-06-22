@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { SkipToMainComponent } from './components/skip-to-main/skip-to-main.component';
 import { LayoutService } from './services/layout.service';
-import { MaskComponent } from './components/mask/mask.component';
-import { MenuComponent } from './components/menu/menu.component';
 import { MetaTagsService } from './services/meta-tags.service';
+import { MaskComponent } from './shared/components/mask/mask.component';
+import { MenuComponent } from './shared/components/menu/menu.component';
+import { SkipToMainComponent } from './shared/components/skip-to-main/skip-to-main.component';
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ContentListItemComponent } from '@jc/components/content-list-item/content-list-item.component';
-import { ContentListItem } from '@jc/content/interfaces/content-list-item.interface';
-import { ContentList } from '@jc/content/interfaces/content-list.interface';
-import { MetaTagsService } from '@jc/services/meta-tags.service';
-
+import { MetaTagsService } from '../../../services/meta-tags.service';
+import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
+import { ContentListItem } from '../../interfaces/content-list-item.interface';
+import { ContentList } from '../../interfaces/content-list.interface';
 
 @Component({
   selector: 'app-content-list-page',
@@ -17,7 +16,7 @@ export class ContentListPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private metaTagsService: MetaTagsService
+    private metaTagsService: MetaTagsService,
   ) {
     this.route.data.subscribe((data: Partial<ContentList>) => {
       this.category = data.category || '';

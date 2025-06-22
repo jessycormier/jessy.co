@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
-import { MetaTagsConfig } from '../meta-tags-config.interface';
+import { Inject, Injectable } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
+import { MetaTagsConfig } from '../shared/interfaces/meta-tags-config.interface';
 
 /**
  * Service to manage meta tags for SEO and social sharing.
@@ -10,10 +10,9 @@ import { MetaTagsConfig } from '../meta-tags-config.interface';
  * @see https://stackoverflow.com/questions/77376650/how-to-solve-dynamic-meta-tags-in-angular-ssr
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MetaTagsService {
-
   private defaultConfig: MetaTagsConfig = {
     title: 'Jessy.co',
     description: "Hi, I'm Jessy welcome to my website",
@@ -23,14 +22,15 @@ export class MetaTagsService {
     url: 'https://jessy.co/',
     type: 'website',
     siteName: 'Jessy.co',
-    twitterCard: 'summary_large_image'
+    twitterCard: 'summary_large_image',
   };
 
   constructor(
     private meta: Meta,
     private title: Title,
-    @Inject(DOCUMENT) private document: Document
-  ) {}  updateTags(config: MetaTagsConfig): void {
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
+  updateTags(config: MetaTagsConfig): void {
     const mergedConfig = { ...this.defaultConfig, ...config };
 
     // Update title
@@ -89,29 +89,29 @@ export class MetaTagsService {
 
     // Create article structured data
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": config.title,
-      "description": config.description,
-      "image": config.image,
-      "author": {
-        "@type": "Person",
-        "name": config.author || "Jessy"
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: config.title,
+      description: config.description,
+      image: config.image,
+      author: {
+        '@type': 'Person',
+        name: config.author || 'Jessy',
       },
-      "publisher": {
-        "@type": "Organization",
-        "name": config.siteName,
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://jessy.co/assets/favicon-512x512.png"
-        }
+      publisher: {
+        '@type': 'Organization',
+        name: config.siteName,
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://jessy.co/assets/favicon-512x512.png',
+        },
       },
-      "datePublished": config.publishedDate,
-      "dateModified": config.modifiedDate || config.publishedDate,
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": config.url
-      }
+      datePublished: config.publishedDate,
+      dateModified: config.modifiedDate || config.publishedDate,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': config.url,
+      },
     };
 
     // Add structured data script
@@ -166,17 +166,19 @@ export class MetaTagsService {
 
       const firstParagraph = cleanText.split('\n')[0];
       if (firstParagraph && firstParagraph.length > 20) {
-        description = firstParagraph.length > 155
-          ? firstParagraph.substring(0, 155) + '...'
-          : firstParagraph;
+        description = firstParagraph.length > 155 ? firstParagraph.substring(0, 155) + '...' : firstParagraph;
       }
     }
 
     const baseUrl = 'https://jessy.co';
-    const categoryPath = frontmatter.category === 'blog' ? 'blog' :
-                        frontmatter.category === 'thoughts' ? 'thoughts' :
-                        frontmatter.category === 'figment-blog' ? 'figment-blog' :
-                        frontmatter.category;
+    const categoryPath =
+      frontmatter.category === 'blog'
+        ? 'blog'
+        : frontmatter.category === 'thoughts'
+          ? 'thoughts'
+          : frontmatter.category === 'figment-blog'
+            ? 'figment-blog'
+            : frontmatter.category;
 
     return {
       title: `${frontmatter.title} | Jessy.co`,
@@ -185,20 +187,20 @@ export class MetaTagsService {
       url: `${baseUrl}/${categoryPath}/${frontmatter.id}`,
       type: 'article',
       publishedDate: frontmatter.date ? new Date(frontmatter.date).toISOString() : undefined,
-      image: `${baseUrl}/assets/profile/profile.jpg` // You can customize this per article if needed
+      image: `${baseUrl}/assets/profile/profile.jpg`, // You can customize this per article if needed
     };
   }
   generateCategoryMetaTags(category: string): MetaTagsConfig {
     const categoryTitles: Record<string, string> = {
-      'blog': 'Blog',
-      'thoughts': 'Thoughts',
-      'figment-blog': 'Figment Blog'
+      blog: 'Blog',
+      thoughts: 'Thoughts',
+      'figment-blog': 'Figment Blog',
     };
 
     const categoryDescriptions: Record<string, string> = {
-      'blog': 'Technical articles, tutorials, and insights from my development journey.',
-      'thoughts': 'Random thoughts, ideas, and reflections on technology and life.',
-      'figment-blog': 'Development updates and stories from Project Figment.'
+      blog: 'Technical articles, tutorials, and insights from my development journey.',
+      thoughts: 'Random thoughts, ideas, and reflections on technology and life.',
+      'figment-blog': 'Development updates and stories from Project Figment.',
     };
 
     const title = categoryTitles[category] || category;
@@ -209,7 +211,7 @@ export class MetaTagsService {
       description,
       keywords: `${category}, articles, posts, jessyco, jessy`,
       url: `https://jessy.co/${category}`,
-      type: 'website'
+      type: 'website',
     };
   }
 }

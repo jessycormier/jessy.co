@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ComponentState } from '@jc/component-state.enum';
-import { ContentListItem } from '@jc/content/interfaces/content-list-item.interface';
-import { StatefulComponent } from '@jc/stateful-component.interface';
+import { ContentListItem } from '../../../content/interfaces/content-list-item.interface';
+import { ComponentState } from '../../enums/component-state.enum';
+import { StatefulComponent } from '../../interfaces/stateful-component.interface';
 
 @Component({
   selector: 'app-content-list-item',
