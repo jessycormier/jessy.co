@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect } from '@angular/core';
-import { LayoutService } from '@jc/services/layout.service';
+import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-mask',

@@ -1,9 +1,8 @@
-import { Component, effect, HostListener } from '@angular/core';
-import { LayoutService } from '@jc/services/layout.service';
-import { LinkComponent } from '../link/link.component';
 import { CommonModule } from '@angular/common';
-import { ContentService } from '@jc/content/services/content.service';
-import { ContentCategory } from '@jc/content/enum/content-category.enum';
+import { Component, effect, HostListener } from '@angular/core';
+import { ContentService } from '../../../content/services/content.service';
+import { LayoutService } from '../../../services/layout.service';
+import { LinkComponent } from '../link/link.component';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +21,6 @@ export class MenuComponent {
     private layout: LayoutService,
     contentService: ContentService,
   ) {
-
     contentService.getCategoryList().subscribe((categories) => (this.categories = categories));
 
     effect(() => {

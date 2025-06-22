@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { CenterLayoutComponent } from '@jc/layouts/center-layout/center-layout.component';
-import { StandardLayoutComponent } from '@jc/layouts/standard-layout/standard-layout.component';
+import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
+import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
 
 export const routes: Routes = [
   // Standard Layout

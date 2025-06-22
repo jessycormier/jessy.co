@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { LayoutService } from '../../../services/layout.service';
 import { BrandComponent } from '../brand/brand.component';
 import { LinkComponent } from '../link/link.component';
-import { LayoutService } from '@jc/services/layout.service';
 
 @Component({
   selector: 'app-header',

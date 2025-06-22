@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgxTypedWriterModule } from 'ngx-typed-writer';
-import { MetaTagsService } from '@jc/services/meta-tags.service';
+import { MetaTagsService } from '../../../services/meta-tags.service';
 
 @Component({
   selector: 'app-about-page',
@@ -37,11 +37,12 @@ export class AboutPageComponent implements OnInit {
     // Set about page meta tags
     this.metaTagsService.updateTags({
       title: 'About Jessy | Jessy.co',
-      description: 'Learn more about Jessy - a web developer, photographer, teacher, father, and lifelong learner passionate about building tools and sharing knowledge.',
+      description:
+        'Learn more about Jessy - a web developer, photographer, teacher, father, and lifelong learner passionate about building tools and sharing knowledge.',
       keywords: 'about jessy, web developer, photographer, teacher, portfolio, biography',
       url: 'https://jessy.co/about',
       type: 'profile',
-      image: 'https://jessy.co/assets/profile/profile.jpg'
+      image: 'https://jessy.co/assets/profile/profile.jpg',
     });
   }
 

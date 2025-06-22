@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { ContentCategory } from '@jc/content/enum/content-category.enum';
-import { Content } from '@jc/content/interfaces/content.interface';
-import { MetaTagsService } from '@jc/services/meta-tags.service';
 import { MarkdownModule } from 'ngx-markdown';
-import { LinkComponent } from "../../../components/link/link.component";
+import { MetaTagsService } from '../../../services/meta-tags.service';
+import { LinkComponent } from '../../../shared/components/link/link.component';
+import { ContentCategory } from '../../enum/content-category.enum';
+import { Content } from '../../interfaces/content.interface';
 
 @Component({
   imports: [MarkdownModule, RouterLink, LinkComponent],
@@ -21,7 +21,7 @@ export class ContentPageComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private metaTagsService: MetaTagsService
+    private metaTagsService: MetaTagsService,
   ) {
     this.route.data.subscribe((data) => {
       this.data = data['content'] as Content;
@@ -36,10 +36,7 @@ export class ContentPageComponent {
         this.markdown = this.data.markdown;
 
         // Update meta tags for this content
-        const metaConfig = this.metaTagsService.generateContentMetaTags(
-          this.data.frontmatter,
-          this.data.markdown
-        );
+        const metaConfig = this.metaTagsService.generateContentMetaTags(this.data.frontmatter, this.data.markdown);
 
         // Override with any custom meta from frontmatter
         if (this.data.frontmatter.description) {
