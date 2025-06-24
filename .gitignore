@@ -1,8 +1,12 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Site specific
+# Project specific
+.vercel
+.angular
+/_
 public/content/index.json
 public/content/routes.txt
+
 
 # Compiled output
 /dist
@@ -44,5 +48,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-.vercel
-.angular
