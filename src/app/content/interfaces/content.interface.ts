@@ -1,16 +1,10 @@
-import { ContentCategory } from '../enum/content-category.enum';
-import { ContentRouteData } from './content-route-data.interface';
-
-export interface Content extends ContentRouteData {
+export interface Content {
   frontmatter: {
     id: string;
     title: string;
     date: string;
-    category: ContentCategory;
+    category: string;
     aiEditor?: boolean;
-    description?: string;
-    keywords?: string;
-    image?: string;
   };
   markdown: string;
 }

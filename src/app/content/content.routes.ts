@@ -5,18 +5,13 @@ import { ContentPageComponent } from './pages/content-page/content-page.componen
 
 export const contentRoutes: Routes = [
   {
-    path: '',
-    children: [
-      {
-        path: ':category/:id',
-        component: ContentPageComponent,
-        resolve: { content: contentResolver },
-      },
-      {
-        path: ':category',
-        component: ContentListPageComponent,
-        resolve: { items: contentResolver },
-      },
-    ],
+    path: ':category/:id',
+    component: ContentPageComponent,
+    resolve: { content: contentResolver },
+  },
+  {
+    path: ':category',
+    component: ContentListPageComponent,
+    resolve: { items: contentResolver },
   },
 ];

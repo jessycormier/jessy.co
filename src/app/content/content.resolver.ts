@@ -1,63 +1,42 @@
-import { isPlatformBrowser } from '@angular/common';
-import { inject, PLATFORM_ID } from '@angular/core';
-import { ResolveFn, Router } from '@angular/router';
-import { catchError, of, switchMap } from 'rxjs';
-import { CategoryValidationService } from './services/category-validation.service';
+import { inject } from '@angular/core';
+import { ResolveFn } from '@angular/router';
+import { EMPTY } from 'rxjs';
 import { ContentService } from './services/content.service';
 
 export const contentResolver: ResolveFn<any | null> = (route) => {
   const contentService = inject(ContentService);
-  const categoryValidationService = inject(CategoryValidationService);
-  const router = inject(Router);
-  const platformId = inject(PLATFORM_ID);
 
-  // Get category and id from route parameters
-  const categoryParam = route.paramMap.get('category');
-  const id = route.paramMap.get('id');
+  try {
+    const category = route.paramMap.get('category') || '';
+    const id = route.paramMap.get('id');
 
-  if (!categoryParam) {
-    // Only navigate during browser rendering, not during SSR
-    if (isPlatformBrowser(platformId)) {
-      router.navigate(['/error/404']);
+    // Post
+    if (category && id) {
+      const content = contentService.getContent(category, id);
+
+      if (!content) {
+        throw new Error(
+          `No content found for category: ${category}, id: ${id}`
+        );
+      }
+
+      return content;
     }
-    return of(null);
+    // Category
+    else if (category && !id) {
+      const content = contentService.getCategory(category);
+
+      if (!content) {
+        throw new Error(`No content found for category: ${category}`);
+      }
+
+      return content;
+    }
+    // Could be fun to have a randomizer to go to "known" page if content was not found.
+    throw new Error(
+      'Invalid route parameters. Category and/or ID is missing or no content found.'
+    );
+  } catch (error) {
+    return EMPTY;
   }
-
-  // Validate category exists in index.json and get corresponding enum
-  return categoryValidationService.getValidCategoryEnum(categoryParam).pipe(
-    switchMap((category) => {
-      if (!category) {
-        // Only navigate during browser rendering, not during SSR
-        if (isPlatformBrowser(platformId)) {
-          router.navigate(['/error/404']);
-        }
-        return of(null);
-      }
-
-      // Determine if this is a list or content request based on presence of id
-      if (id) {
-        // Content request (e.g., /blog/my-post)
-        return contentService.getContent(category, id).pipe(
-          catchError(() => {
-            // Only navigate during browser rendering, not during SSR
-            if (isPlatformBrowser(platformId)) {
-              router.navigate(['/error/404']);
-            }
-            return of(null);
-          }),
-        );
-      } else {
-        // List request (e.g., /blog)
-        return contentService.getCategory(category).pipe(
-          catchError(() => {
-            // Only navigate during browser rendering, not during SSR
-            if (isPlatformBrowser(platformId)) {
-              router.navigate(['/error/404']);
-            }
-            return of(null);
-          }),
-        );
-      }
-    }),
-  );
 };

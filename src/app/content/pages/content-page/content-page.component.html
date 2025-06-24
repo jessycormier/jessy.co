@@ -18,6 +18,12 @@
 <footer class="flex items-center justify-between">
   <app-link [routerLink]="'../'">Back to Index</app-link>
   @if (aiEditor) {
-    <span class="cursor-help text-xs font-mono" title="This little badge is added when I had AI help edit the writing.">AI Reviewed</span>
+    <span class="group relative inline-block">
+      AI Reviewed
+      <span
+        class="absolute bottom-full left-1/2 mb-2 w-fit -translate-x-1/2 scale-95 transform rounded bg-black px-3 py-1 font-mono text-xs whitespace-nowrap text-white opacity-0 transition group-hover:scale-100 group-hover:opacity-100">
+        This little badge is added when I had AI help edit the writing.
+      </span>
+    </span>
   }
 </footer>
