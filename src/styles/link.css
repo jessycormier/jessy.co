@@ -6,13 +6,17 @@ app-link {
 
 app-link a,
 app-link span.btn-link {
-  @apply pointer-events-auto relative mx-0.5 inline-block transform cursor-pointer text-nowrap text-stone-700 !no-underline transition-all;
-  @apply dark:text-stone-200;
+  @apply relative inline-block;
+  @apply pointer-events-auto cursor-pointer;
+  @apply transform !no-underline transition-all;
+  @apply mx-0.5;
+  @apply text-nowrap;
+  @apply text-base-content;
 }
 
 app-link a:hover,
 app-link span.btn-link:hover {
-  @apply dark:text-black;
+  @apply text-base-content;
 }
 
 app-link a::before,
@@ -49,5 +53,5 @@ app-link a span.indicator {
 }
 
 app-link a.active span.indicator {
-  @apply inline-block pr-1 text-stone-900 dark:text-stone-100;
+  @apply inline-block pr-1 text-base-300;
 }

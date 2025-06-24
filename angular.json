@@ -36,7 +36,8 @@
             ],
             "styles": [
               "src/styles/main.css"
-            ]
+            ],
+            "scripts": ["node_modules/theme-change/index.js"]
           },
           "configurations": {
             "production": {
@@ -99,7 +100,8 @@
             ],
             "styles": [
               "src/styles/main.css"
-            ]
+            ],
+            "scripts": ["node_modules/theme-change/index.js"]
           }
         }
       }

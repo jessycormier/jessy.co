@@ -30,6 +30,7 @@
     "remark-stringify": "^11.0.0",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.1.10",
+    "theme-change": "^2.5.0",
     "tslib": "^2.3.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
