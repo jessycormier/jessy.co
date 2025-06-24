@@ -65,4 +65,21 @@ export class LayoutService {
     this.renderer.removeStyle(document.body, 'overflow');
     this.renderer.removeStyle(document.body, 'padding-right');
   }
+
+  toggleTheme() {
+
+    const currentTheme = this.getTheme();
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    console.log(`Switching theme from ${currentTheme} to ${newTheme}`);
+    this.setTheme(newTheme);
+  }
+
+  getTheme() {
+    return window.localStorage.getItem('theme');
+  }
+
+  setTheme(theme = 'dark') {
+    window.localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 }

@@ -1,15 +1,37 @@
-<div class="relative m-auto mb-4 max-w-5xl text-sm print:hidden" role="alert" #help>
-  <app-link class="animate-pulse" (click)="message.classList.remove('hidden'); help.classList.add('hidden')">Show Help</app-link>
+<div
+  class="relative m-auto mb-4 max-w-5xl text-sm print:hidden"
+  role="alert"
+  #help
+>
+  <app-link
+    class="animate-pulse"
+    (click)="message.classList.remove('hidden'); help.classList.add('hidden')"
+    >Show Help</app-link
+  >
 </div>
 
-<div class="relative m-auto mb-4 hidden max-w-5xl bg-blue-50 p-4 px-8 text-sm dark:bg-gray-800 print:hidden" role="alert" #message>
-  <span class="font-medium">Hey!</span>
-  <p>Thanks for checking out my resume.</p>
+<div
+  class="relative m-auto mb-4 hidden max-w-5xl p-4 px-8 text-sm print:hidden"
+  #message
+>
+  <div role="alert" class="relative alert border border-base-content">
+    <div>
+      <span class="font-medium">Hey!</span>
+      <p>Thanks for checking out my resume.</p>
 
-  By the way, Clicking on words like &gt;&gt;
-  <app-resume-word value="Angular">Angular</app-resume-word>
-  &lt;&lt; will let you see all references ( like
-  <app-resume-word value="Angular">angular</app-resume-word>
-  ) to that topic. It also shows what word is highlighted on the bottom of the screen.
-  <app-link class="absolute top-4 right-1.5 animate-pulse" (click)="message.classList.add('hidden'); help.classList.remove('hidden')">Close</app-link>
+      By the way, Clicking on words like &gt;&gt;
+      <app-resume-word value="Angular">Angular</app-resume-word>
+      &lt;&lt; will let you see all references ( like
+      <app-resume-word value="Angular">angular</app-resume-word>
+      ) to that topic. It also shows what word is highlighted on the bottom of
+      the screen.
+      <app-link
+        class="absolute top-4 right-1.5 animate-pulse"
+        (click)="
+          message.classList.add('hidden'); help.classList.remove('hidden')
+        "
+        >Close</app-link
+      >
+    </div>
+  </div>
 </div>

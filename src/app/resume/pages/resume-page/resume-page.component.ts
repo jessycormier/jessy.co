@@ -4,6 +4,7 @@ import { ResumeDateRangeComponent } from '../../resume-date-range/resume-date-ra
 import { ResumeHelpSectionComponent } from '../../resume-help-section/resume-help-section.component';
 import { ResumeWordComponent } from '../../resume-word/resume-word.component';
 import { HighlightService } from './../../word-highlight.service';
+import { BackToHomeButtonComponent } from "../../../shared/components/back-to-home-button/back-to-home-button.component";
 
 type HighlightWord = string;
 type DisplayWord = string;
@@ -12,7 +13,7 @@ type CategoryName = string;
 
 @Component({
   selector: 'app-resume-page',
-  imports: [ResumeWordComponent, ToastComponent, ResumeDateRangeComponent, ResumeHelpSectionComponent],
+  imports: [ResumeWordComponent, ToastComponent, ResumeDateRangeComponent, ResumeHelpSectionComponent, BackToHomeButtonComponent],
   templateUrl: './resume-page.component.html',
 })
 export class ResumePageComponent {

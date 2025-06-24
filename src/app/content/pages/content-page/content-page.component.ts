@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
-import { MetaTagsService } from '../../../services/meta-tags.service';
 import { LinkComponent } from '../../../shared/components/link/link.component';
-import { ContentCategory } from '../../enum/content-category.enum';
 import { Content } from '../../interfaces/content.interface';
 
 @Component({
@@ -15,56 +13,19 @@ export class ContentPageComponent {
   id!: string;
   date!: string;
   title!: string;
-  category!: ContentCategory;
+  category!: string;
   aiEditor = false;
   markdown!: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private metaTagsService: MetaTagsService,
-  ) {
+  constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data) => {
       this.data = data['content'] as Content;
-
-      // Add null checks to prevent errors during SSR prerendering
-      if (this.data && this.data.frontmatter) {
-        this.id = this.data.frontmatter.id;
-        this.date = this.data.frontmatter.date;
-        this.title = this.data.frontmatter.title;
-        this.category = this.data.frontmatter.category;
-        this.aiEditor = this.data.frontmatter.aiEditor ?? false;
-        this.markdown = this.data.markdown;
-
-        // Update meta tags for this content
-        const metaConfig = this.metaTagsService.generateContentMetaTags(this.data.frontmatter, this.data.markdown);
-
-        // Override with any custom meta from frontmatter
-        if (this.data.frontmatter.description) {
-          metaConfig.description = this.data.frontmatter.description;
-        }
-        if (this.data.frontmatter.keywords) {
-          metaConfig.keywords = this.data.frontmatter.keywords;
-        }
-        if (this.data.frontmatter.image) {
-          metaConfig.image = this.data.frontmatter.image;
-        }
-
-        this.metaTagsService.updateTags(metaConfig);
-      } else {
-        // Handle null data gracefully
-        this.id = '';
-        this.date = '';
-        this.title = 'Content not found';
-        this.category = ContentCategory.Blog;
-        this.aiEditor = false;
-        this.markdown = '# Content not available\n\nThis content could not be loaded.';
-
-        // Set error meta tags
-        this.metaTagsService.updateTags({
-          title: 'Content not found | Jessy.co',
-          description: 'The requested content could not be found.',
-        });
-      }
+      this.id = this.data.frontmatter.id;
+      this.date = this.data.frontmatter.date;
+      this.title = this.data.frontmatter.title;
+      this.category = this.data.frontmatter.category;
+      this.aiEditor = this.data.frontmatter.aiEditor ?? false;
+      this.markdown = this.data.markdown;
     });
   }
 }

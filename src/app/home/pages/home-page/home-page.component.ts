@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentListItem } from '../../../content/interfaces/content-list-item.interface';
 import { ContentService } from '../../../content/services/content.service';
+import { ContentListItem } from '../../../content/interfaces/content-list-item.interface';
 import { MetaTagsService } from '../../../services/meta-tags.service';
 import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
 import { ComponentState } from '../../../shared/enums/component-state.enum';
@@ -17,19 +17,23 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private contentService: ContentService,
-    private metaTagsService: MetaTagsService,
+    private metaTagsService: MetaTagsService
   ) {}
 
   ngOnInit() {
     // Set home page meta tags
     this.metaTagsService.updateTags({
       title: 'Jessy.co - Developer, Builder, Learner',
-      description: "Hi, I'm Jessy welcome to my website. I write about development, share thoughts, and document my journey building tools.",
-      keywords: 'jessyco, jessy, developer, blog, portfolio, angular, typescript, web development',
+      description:
+        "Hi, I'm Jessy welcome to my website. I write about development, share thoughts, and document my journey building tools.",
+      keywords:
+        'jessyco, jessy, developer, blog, portfolio, angular, typescript, web development',
       url: 'https://jessy.co/',
       type: 'website',
     });
 
-    this.contentService.getLatest().subscribe((contentItems) => (this.latestItems = contentItems));
+    this.contentService
+      .getLatest()
+      .subscribe((contentItems) => (this.latestItems = contentItems));
   }
 }

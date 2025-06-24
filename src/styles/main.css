@@ -1,8 +1,10 @@
 @import "tailwindcss";
+@import "./theme.css";
 @plugin "@tailwindcss/typography";
 
+
 /* This is to enable dark mode via css class */
-@custom-variant dark (&:where(.dark, .dark *));
+/* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @font-face {
   font-family: "Fira Code";
@@ -21,10 +23,11 @@
   @keyframes text-blink {
     0%,
     100% {
-      color: var(--color-black);
+      color: var(--color-base-content);
+
     }
     50% {
-      color: var(--color-white);
+      color: var(--color-base-100);
     }
   }
 
@@ -43,14 +46,25 @@
 }
 
 @layer base {
-  html {
-    @apply h-full min-h-full;
+  html,
+  body {
     @apply antialiased;
+    scrollbar-color: var(--color-base-300);
   }
 
   body {
-    @apply h-full min-h-full;
+    overflow-y: scroll;
+    /* scroll bar showing/hiding happens in layout service */
   }
+
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    /* background-color: var(--fm-selection-color-bg);
+    color: var(--fm-selection-color); */
+  }
+
   /*
   *:focus {
     @apply outline-yellow-500 ring;
@@ -79,14 +93,17 @@
   }
 
   mark {
-    @apply my-2 inline-block bg-black px-2 py-1 font-mono font-bold text-white;
+    @apply inline-block;
+    @apply font-mono font-bold;
+    @apply my-2 px-2 py-1;
+    @apply bg-base-100 text-base-content;
   }
 
 
   blockquote {
-    @apply relative bg-black font-mono tracking-tight text-white;
-    @apply text-sm;
-    /* @apply mx-auto max-w-2xl; */
+    @apply relative;
+    @apply bg-base-content text-base-100;
+    @apply text-sm font-mono tracking-tight;
     @apply -rotate-2 transform;
     @apply transition-transform duration-300 hover:scale-105 hover:rotate-0;
   }
@@ -99,32 +116,12 @@
   margin-inline: auto;
 }
 
-/* Typography plugin */
-/* @utility prose {
-  --tw-prose-body: var(--color-primary);
-  --tw-prose-headings: var(--color-primary);
-  --tw-prose-bold: var(--color-primary);
-  --tw-prose-quote-borders: var(--color-slate-300);
-  --tw-prose-quotes: var(--color-muted-foreground);
-  --tw-prose-code: var(--color-primary);
-
-  code {
-    &::before,
-    &::after {
-      display : none ;
-    }
-    text-wrap : nowrap ;
-  }
-
-  blockquote {
-    font-weight : 400 ;
-  }
-} */
-
 @layer components {
   /* Link Component - Used on resume page */
   .link {
-    @apply p-0 text-white transition-all hover:bg-white hover:px-2 hover:text-black;
+    @apply p-0 hover:px-2;
+    @apply transition-all;
+    @apply text-base-content hover:bg-base-100 hover:text-base-100;
   }
 
   /* Comma List Component */
@@ -150,6 +147,7 @@
 @import "./link.css";
 @import "./resume-word.css";
 
+
 @layer utilities {
   .text-vertical {
     @apply rotate-180;
@@ -158,8 +156,8 @@
 
   .strip {
     --stripe-size: 20px;
-    --stripe-color: theme(colors.black);
-    --stripe-alt-color: theme(colors.white);
+    --stripe-color: var(--color-base-100);
+    --stripe-alt-color: var(--color-base-content);
     background-image: repeating-linear-gradient(
       -45deg,
       var(--stripe-alt-color),

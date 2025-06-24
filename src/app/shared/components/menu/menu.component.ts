@@ -17,11 +17,10 @@ export class MenuComponent {
     count: number;
   }[] = [];
 
-  constructor(
-    private layout: LayoutService,
-    contentService: ContentService,
-  ) {
-    contentService.getCategoryList().subscribe((categories) => (this.categories = categories));
+  constructor(private layout: LayoutService, contentService: ContentService) {
+    contentService
+      .getCategoryList()
+      .subscribe((categories) => (this.categories = categories));
 
     effect(() => {
       this.isShown = this.layout.menu();
@@ -33,7 +32,7 @@ export class MenuComponent {
     this.layout.closeMenu();
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   handleEscKey() {
     this.layout.closeMenu();
   }

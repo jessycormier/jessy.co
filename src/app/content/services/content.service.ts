@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
-import { catchError, map, of, throwError } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { catchError, EMPTY, map, throwError } from 'rxjs';
 import { UnifiedService } from '../../services/unified.service';
-import { ContentCategory } from '../enum/content-category.enum';
-import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -12,30 +10,31 @@ import { isPlatformBrowser } from '@angular/common';
 export class ContentService {
   private http = inject(HttpClient);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private unifiedService = inject(UnifiedService);
-  private platformId = inject(PLATFORM_ID);
 
-  getContent(category: ContentCategory, id: string) {
-    const results = this.http.get(`content/${category}/${id}.md`, { responseType: 'text' }).pipe(
-      map((markdown) => {
-        const parsedMarkdown = this.unifiedService.parseMarkdown(markdown) || { frontmatter: null, markdown: null };
-        return parsedMarkdown || { frontmatter: null, markdown: null };
-      }),
-      catchError((error) => this.handleError(error)),
-    );
+  getContent(category: string, id: string) {
+    const results = this.http
+      .get(`content/${category}/${id}.md`, { responseType: 'text' })
+      .pipe(
+        map((markdown) => {
+          const parsedMarkdown = this.unifiedService.parseMarkdown(
+            markdown
+          ) || { frontmatter: null, markdown: null };
+          return parsedMarkdown || { frontmatter: null, markdown: null };
+        }),
+        catchError((error) => this.handleError(error))
+      );
 
     return results;
   }
-  getCategory(category: ContentCategory) {
+
+  getCategory(category: string) {
     const results = this.getContentIndex().pipe(
       map((json) => {
-        const categoryData = json.categories.find((c) => c.path === category);
-        if (!categoryData) {
-          throw new Error(`Category '${category}' not found in index`);
-        }
-        return categoryData.items || [];
+        return json.categories.filter((c) => c.path === category)[0].items;
       }),
-      catchError((error) => this.handleError(error)),
+      catchError((error) => this.handleError(error))
     );
 
     return results;
@@ -48,7 +47,7 @@ export class ContentService {
           return { ...c, items: undefined };
         });
       }),
-      catchError((error) => this.handleError(error)),
+      catchError((error) => this.handleError(error))
     );
 
     return results;
@@ -57,7 +56,7 @@ export class ContentService {
   getLatest() {
     const results = this.getContentIndex().pipe(
       map((json) => json.latest),
-      catchError((error) => this.handleError(error)),
+      catchError((error) => this.handleError(error))
     );
 
     return results;
@@ -73,16 +72,9 @@ export class ContentService {
 
     return results;
   }
-  goToError404() {
-    // Only navigate during browser rendering, not during SSR
-    if (isPlatformBrowser(this.platformId)) {
-      this.router.navigate(['/error/404']);
-    }
-    return of(null);
-  }
 
   private handleError(error: any) {
-    this.goToError404();
+    this.router.navigate(['/error/404'], { relativeTo: this.route.root });
     return throwError(() => new Error(error));
   }
 }

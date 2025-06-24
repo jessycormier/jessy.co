@@ -9,14 +9,8 @@ import { LinkComponent } from '../link/link.component';
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {
-  siteLinks = [
-    { routerLink: '/', text: 'Home' },
-    { routerLink: '/thought', text: 'Thought' },
-    { routerLink: '/resume', text: 'Resume' },
-  ];
-
   socialLinks = [
-    { href: 'https://x.com/jessycormier', text: 'X ( Twitter )' },
+    { href: 'https://x.com/jessycormier', text: 'X' },
     { href: 'https://www.linkedin.com/in/jessyco', text: 'LinkedIn' },
     // { href: 'https://bsky.app/profile/jessy.co', text: 'Bluesky' },
     { href: 'https://github.com/jessycormier', text: 'GitHub' },
