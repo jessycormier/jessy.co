@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 @plugin "@tailwindcss/typography";
 
 /* This is to enable dark mode via css class */
