@@ -7,13 +7,17 @@ export const routes: Routes = [
   {
     path: '',
     component: StandardLayoutComponent,
-    loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
-  },
-  {
-    path: 'about',
-    component: StandardLayoutComponent,
-    loadChildren: () =>
-      import('./about/about.module').then((m) => m.AboutModule),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: 'about',
+        title: 'About Jessy | Jessy.co',
+        loadComponent: () => import('./about/pages/about-page/about-page.component')
+      },
+    ],
   },
   {
     path: 'resume',
