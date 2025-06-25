@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
-import { EmptyLayoutComponent } from './layouts/empty-layout/empty-layout.component';
-import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
 import HomePageComponent from './home/pages/home-page/home-page.component';
+import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
+import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
 
 export const routes: Routes = [
   {
@@ -12,36 +11,55 @@ export const routes: Routes = [
       {
         path: '',
         title: 'Jessy.co - Developer, Builder, Learner',
-        component: HomePageComponent // eager loaded component for landing page.
+        component: HomePageComponent, // eager loaded component for landing page.
         // loadComponent: () => import('./home/pages/home-page/home-page.component'),
       },
       {
         path: 'about',
         title: 'About Jessy | Jessy.co',
-        loadComponent: () => import('./about/pages/about-page/about-page.component')
+        loadComponent: () =>
+          import('./about/pages/about-page/about-page.component'),
+      },
+      {
+        path: 'resume',
+        title: 'Resume | Jessy.co',
+        loadComponent: () =>
+          import('./resume/pages/resume-page/resume-page.component'),
+      },
+      {
+        path: 'logs',
+        loadChildren: () =>
+          import('./content/content.module').then((m) => m.ContentModule),
       },
     ],
   },
   {
-    path: 'resume',
-    component: EmptyLayoutComponent,
-    loadChildren: () =>
-      import('./resume/resume.module').then((m) => m.ResumeModule),
-  },
-  {
     path: 'error',
     component: CenterLayoutComponent,
-    loadChildren: () =>
-      import('./error/error.module').then((m) => m.ErrorModule),
+    children: [
+      {
+        path: 'client',
+        title: 'Client Error | Jessy.co',
+        loadComponent: () =>
+          import('./error/pages/status-418-page/status-418-page.component'),
+      },
+      {
+        path: 'not-found',
+        title: 'Page Not Found | Jessy.co',
+        loadComponent: () =>
+          import('./error/pages/status-404-page/status-404-page.component'),
+      },
+      {
+        path: 'server-error',
+        title: 'Server Error | Jessy.co',
+        loadComponent: () =>
+          import('./error/pages/status-500-page/status-500-page.component'),
+      },
+      { path: '404', redirectTo: 'not-found' },
+      { path: '418', redirectTo: 'client' },
+      { path: '500', redirectTo: 'server-error' },
+    ],
   },
-  // Dynamic content routes - Must come 2nd last.
-  {
-    path: '',
-    component: StandardLayoutComponent,
-    loadChildren: () =>
-      import('./content/content.module').then((m) => m.ContentModule),
-  },
-  // Catch All to redirect to not found 404 page.
   {
     path: '**',
     redirectTo: 'error/not-found',
