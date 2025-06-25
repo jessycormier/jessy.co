@@ -8,7 +8,7 @@ import { Content } from '../../interfaces/content.interface';
   imports: [MarkdownModule, RouterLink, LinkComponent],
   templateUrl: './content-page.component.html',
 })
-export class ContentPageComponent {
+export default class ContentPageComponent {
   data!: Content;
   id!: string;
   date!: string;

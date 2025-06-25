@@ -23,7 +23,7 @@
         <app-link routerLink="about">About</app-link>
         <app-link routerLink="resume">Resume</app-link>
 
-        <div class="mt-4 text-2xl">Post Categories</div>
+        <div class="mt-4 text-2xl">Logs</div>
         @for (item of categories; track $index) {
           <div class="flex items-center">
             <app-link [routerLink]="item.path">{{ item.name }}</app-link>

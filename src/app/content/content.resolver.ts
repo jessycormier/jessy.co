@@ -10,6 +10,8 @@ export const contentResolver: ResolveFn<any | null> = (route) => {
     const category = route.paramMap.get('category') || '';
     const id = route.paramMap.get('id');
 
+    console.log(`Resolving content for category: ${category}, id: ${id}`);
+
     // Post
     if (category && id) {
       const content = contentService.getContent(category, id);

@@ -10,13 +10,18 @@ import { ContentList } from '../../interfaces/content-list.interface';
   imports: [ContentListItemComponent],
   templateUrl: './content-list-page.component.html',
 })
-export class ContentListPageComponent implements OnInit {
+export default class ContentListPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
 
   items: ContentListItem[] = [];
 
   ngOnInit() {
+    console.log('ContentListPageComponent initialized');
+    console.log('ContentListPageComponent initialized');
+    console.log('ContentListPageComponent initialized');
+    console.log('ContentListPageComponent initialized');
+    console.log('ContentListPageComponent initialized');
     this.route.data
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((data: Partial<ContentList>) => {

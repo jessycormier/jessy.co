@@ -5,6 +5,8 @@ import { getMarkdownFiles } from './get-markdown-files.function';
 import { getSubdirectories } from './get-sub-directories.function';
 import { MarkdownItem } from './markdown-item.interface';
 
+const ROOT_ROUTE = 'logs';
+
 interface CategoriesAndLatest {
   categories: Category[];
   latest?: MarkdownItem[];
@@ -18,13 +20,15 @@ export async function scanMarkdownFiles(rootDir: string): Promise<CategoriesAndL
   for (const subdir of subDirs) {
     const dirPath = path.join(rootDir, subdir);
     const files = getMarkdownFiles(dirPath);
+    const routePath = ROOT_ROUTE + '/' + subdir;
+    const name = subdir.replace(/-/g, ' ');
 
-    const items = files.map((filePath) => extractFrontmatter(subdir, filePath)).filter(Boolean) as MarkdownItem[];
+    const items = files.map((filePath) => extractFrontmatter(routePath, filePath)).filter(Boolean) as MarkdownItem[];
     allItems = allItems.concat(items);
 
     categories.push({
-      name: subdir.replace(/-/g, ' '),
-      path: subdir,
+      name: name,
+      path: routePath,
       count: items.length,
       items: items.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id)),
     });

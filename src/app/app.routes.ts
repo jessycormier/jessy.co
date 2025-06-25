@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { contentResolver } from './content/content.resolver';
 import HomePageComponent from './home/pages/home-page/home-page.component';
 import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
 import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
@@ -12,7 +13,6 @@ export const routes: Routes = [
         path: '',
         title: 'Jessy.co - Developer, Builder, Learner',
         component: HomePageComponent, // eager loaded component for landing page.
-        // loadComponent: () => import('./home/pages/home-page/home-page.component'),
       },
       {
         path: 'about',
@@ -27,9 +27,16 @@ export const routes: Routes = [
           import('./resume/pages/resume-page/resume-page.component'),
       },
       {
-        path: 'logs',
-        loadChildren: () =>
-          import('./content/content.module').then((m) => m.ContentModule),
+        path: 'logs/:category/:id',
+        resolve: { content: contentResolver },
+        title: 'Log | Jessy.co',
+        loadComponent: () =>import('./content/pages/content-page/content-page.component'),
+      },
+      {
+        path: 'logs/:category',
+        resolve: { items: contentResolver },
+        title: 'Logs | Jessy.co',
+        loadComponent: () => import('./content/pages/content-list-page/content-list-page.component'),
       },
     ],
   },
