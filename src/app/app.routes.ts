@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
 import { EmptyLayoutComponent } from './layouts/empty-layout/empty-layout.component';
 import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
+import HomePageComponent from './home/pages/home-page/home-page.component';
 
 export const routes: Routes = [
   {
@@ -10,7 +11,9 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+        title: 'Jessy.co - Developer, Builder, Learner',
+        component: HomePageComponent // eager loaded component for landing page.
+        // loadComponent: () => import('./home/pages/home-page/home-page.component'),
       },
       {
         path: 'about',
