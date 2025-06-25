@@ -70,7 +70,7 @@ export class LayoutService {
 
     const currentTheme = this.getTheme();
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    console.log(`Switching theme from ${currentTheme} to ${newTheme}`);
+
     this.setTheme(newTheme);
   }
 

@@ -17,11 +17,6 @@ export default class ContentListPageComponent implements OnInit {
   items: ContentListItem[] = [];
 
   ngOnInit() {
-    console.log('ContentListPageComponent initialized');
-    console.log('ContentListPageComponent initialized');
-    console.log('ContentListPageComponent initialized');
-    console.log('ContentListPageComponent initialized');
-    console.log('ContentListPageComponent initialized');
     this.route.data
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((data: Partial<ContentList>) => {

@@ -32,7 +32,11 @@ export class ContentService {
   getCategory(category: string) {
     const results = this.getContentIndex().pipe(
       map((json) => {
-        return json.categories.filter((c) => c.path === category)[0].items;
+        const categoryData = json.categories.find(c => c.path === `logs/${category}`);
+        if (!categoryData) {
+          throw new Error(`Category not found: ${category}`);
+        }
+        return categoryData.items;
       }),
       catchError((error) => this.handleError(error))
     );
@@ -74,7 +78,7 @@ export class ContentService {
   }
 
   private handleError(error: any) {
-    this.router.navigate(['/error/404'], { relativeTo: this.route.root });
+    this.router.navigate(['/error/not-found'], { relativeTo: this.route.root });
     return throwError(() => new Error(error));
   }
 }

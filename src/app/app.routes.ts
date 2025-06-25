@@ -62,9 +62,6 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./error/pages/status-500-page/status-500-page.component'),
       },
-      { path: '404', redirectTo: 'not-found' },
-      { path: '418', redirectTo: 'client' },
-      { path: '500', redirectTo: 'server-error' },
     ],
   },
   {

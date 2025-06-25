@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BackToHomeButtonComponent } from '../../../shared/components/back-to-home-button/back-to-home-button.component';
 import { ToastComponent } from '../../../shared/components/toast/toast.component';
 import { ResumeDateRangeComponent } from '../../resume-date-range/resume-date-range.component';
@@ -23,6 +23,8 @@ type CategoryName = string;
   templateUrl: './resume-page.component.html',
 })
 export default class ResumePageComponent {
+  highlightService = inject(HighlightService);
+
   skillsAndAbilities: [CategoryName, Skill[]][] = [
     [
       'Frameworks and Technologies',
@@ -164,8 +166,6 @@ export default class ResumePageComponent {
       ],
     ],
   ];
-
-  constructor(public highlightService: HighlightService) {}
 
   onCloseClick() {
     this.highlightService.selectedWord.set(undefined);
