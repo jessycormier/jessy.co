@@ -15,6 +15,7 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
+    // provideMarkdown(), // using provider directly in component to reduce bundle size
     provideHttpClient(withFetch()),
   ],
 };
