@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { BrandComponent } from '../brand/brand.component';
 import { LinkComponent } from '../link/link.component';
 
 @Component({
   selector: 'app-footer',
-  imports: [CommonModule, LinkComponent, BrandComponent],
+  imports: [LinkComponent, BrandComponent],
   templateUrl: './footer.component.html',
 })
 export class FooterComponent {

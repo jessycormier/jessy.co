@@ -1,14 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, SecurityContext } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MarkdownModule } from 'ngx-markdown';
+import {
+  MarkdownModule,
+  MarkdownService,
+  SECURITY_CONTEXT,
+} from 'ngx-markdown';
 import { LinkComponent } from '../../../shared/components/link/link.component';
 import { Content } from '../../interfaces/content.interface';
 
 @Component({
   imports: [MarkdownModule, RouterLink, LinkComponent],
+  providers: [
+    MarkdownService,
+    { provide: SECURITY_CONTEXT, useValue: SecurityContext.HTML },
+  ],
   templateUrl: './content-page.component.html',
 })
-export class ContentPageComponent {
+export default class ContentPageComponent {
+  private route = inject(ActivatedRoute);
+
   data!: Content;
   id!: string;
   date!: string;
@@ -17,7 +27,7 @@ export class ContentPageComponent {
   aiEditor = false;
   markdown!: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
     this.route.data.subscribe((data) => {
       this.data = data['content'] as Content;
       this.id = this.data.frontmatter.id;

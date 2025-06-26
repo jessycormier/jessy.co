@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { LinkComponent } from '../../shared/components/link/link.component';
 import { ResumeWordComponent } from '../resume-word/resume-word.component';
 
@@ -7,4 +7,10 @@ import { ResumeWordComponent } from '../resume-word/resume-word.component';
   imports: [ResumeWordComponent, LinkComponent],
   templateUrl: './resume-help-section.component.html',
 })
-export class ResumeHelpSectionComponent {}
+export class ResumeHelpSectionComponent {
+  readonly isHelpVisible = signal(false);
+
+  toggleHelp() {
+    this.isHelpVisible.update(visible => !visible);
+  }
+}

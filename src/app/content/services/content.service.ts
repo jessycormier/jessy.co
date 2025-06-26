@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, EMPTY, map, throwError } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { UnifiedService } from '../../services/unified.service';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class ContentService {
   private unifiedService = inject(UnifiedService);
 
   getContent(category: string, id: string) {
-    const results = this.http
+    return this.http
       .get(`content/${category}/${id}.md`, { responseType: 'text' })
       .pipe(
         map((markdown) => {
@@ -22,22 +22,22 @@ export class ContentService {
             markdown
           ) || { frontmatter: null, markdown: null };
           return parsedMarkdown || { frontmatter: null, markdown: null };
-        }),
-        catchError((error) => this.handleError(error))
+        })
       );
-
-    return results;
   }
 
   getCategory(category: string) {
-    const results = this.getContentIndex().pipe(
+    return this.getContentIndex().pipe(
       map((json) => {
-        return json.categories.filter((c) => c.path === category)[0].items;
-      }),
-      catchError((error) => this.handleError(error))
+        const categoryData = json.categories.find(
+          (c) => c.path === `logs/${category}`
+        );
+        if (!categoryData) {
+          throw new Error(`Category not found: ${category}`);
+        }
+        return categoryData.items;
+      })
     );
-
-    return results;
   }
 
   getCategoryList() {
@@ -74,7 +74,7 @@ export class ContentService {
   }
 
   private handleError(error: any) {
-    this.router.navigate(['/error/404'], { relativeTo: this.route.root });
+    this.router.navigate(['/error/not-found'], { relativeTo: this.route.root });
     return throwError(() => new Error(error));
   }
 }
