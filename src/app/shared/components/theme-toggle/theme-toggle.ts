@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { LayoutService } from '../../../services/layout.service';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-theme-toggle',
   templateUrl: './theme-toggle.html',
 })
 export class ThemeToggle {
-  layout = inject(LayoutService);
+  themeService = inject(ThemeService);
 }
