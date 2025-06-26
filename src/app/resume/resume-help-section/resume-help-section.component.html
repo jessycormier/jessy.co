@@ -1,18 +1,18 @@
 <div
   class="relative m-auto mb-4 max-w-5xl text-sm print:hidden"
   role="alert"
-  #help
+  [class.hidden]="isHelpVisible()"
 >
   <app-link
     class="animate-pulse"
-    (click)="message.classList.remove('hidden'); help.classList.add('hidden')"
+    (click)="toggleHelp()"
     >Show Help</app-link
   >
 </div>
 
 <div
-  class="relative m-auto mb-4 hidden max-w-5xl p-4 px-8 text-sm print:hidden"
-  #message
+  class="relative m-auto mb-4 max-w-5xl p-4 px-8 text-sm print:hidden"
+  [class.hidden]="!isHelpVisible()"
 >
   <div role="alert" class="relative alert border border-base-content">
     <div>
@@ -27,9 +27,7 @@
       the screen.
       <app-link
         class="absolute top-4 right-1.5 animate-pulse"
-        (click)="
-          message.classList.add('hidden'); help.classList.remove('hidden')
-        "
+        (click)="toggleHelp()"
         >Close</app-link
       >
     </div>

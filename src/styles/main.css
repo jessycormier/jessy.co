@@ -2,6 +2,15 @@
 @import "./theme.css";
 @plugin "@tailwindcss/typography";
 
+/* Theme transition and FOUC prevention */
+:root {
+  color-scheme: dark light;
+}
+
+html {
+  /* Smooth theme transitions */
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
 
 /* This is to enable dark mode via css class */
 /* @custom-variant dark (&:where(.dark, .dark *)); */

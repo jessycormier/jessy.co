@@ -6,6 +6,6 @@ import { RouterLink } from '@angular/router';
   imports: [RouterLink],
   templateUrl: './status-500-page.component.html'
 })
-export class Status500PageComponent {
+export default class Status500PageComponent {
 
 }

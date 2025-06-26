@@ -1,10 +1,8 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-skip-to-main',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './skip-to-main.component.html',
   styles: [],
 })

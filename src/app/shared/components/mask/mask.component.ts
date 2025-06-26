@@ -1,10 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component, effect } from '@angular/core';
 import { LayoutService } from '../../../services/layout.service';
 
 @Component({
   selector: 'app-mask',
-  imports: [CommonModule],
   templateUrl: './mask.component.html',
 })
 export class MaskComponent {

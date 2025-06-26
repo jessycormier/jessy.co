@@ -1,6 +1,9 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark" class="min-h-full">
   <head>
+    <!-- Theme initialization script to prevent FOUC (Flash of Unstyled Content) -->
+    <script src="/theme-init.js"></script>
+
     <!--
 
     Should you find yourself here, reading this then you and I probably can be
@@ -63,8 +66,20 @@
     <meta name="theme-color" content="#000000" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="msapplication-TileImage" content="/assets/favicon-512x512.png" />
+    <style>
+      html,
+      body {
+        height: 100%;
+        min-height: 100%;
+        max-height: 100%;
+      }
+      body {
+        overflow-x: hidden;
+        overflow-y: scroll;
+      }
+    </style>
   </head>
-  <body>
+  <body class="min-h-full">
     <app-root></app-root>
   </body>
 </html>

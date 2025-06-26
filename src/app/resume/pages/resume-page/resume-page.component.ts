@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { BackToHomeButtonComponent } from '../../../shared/components/back-to-home-button/back-to-home-button.component';
 import { ToastComponent } from '../../../shared/components/toast/toast.component';
 import { ResumeDateRangeComponent } from '../../resume-date-range/resume-date-range.component';
 import { ResumeHelpSectionComponent } from '../../resume-help-section/resume-help-section.component';
 import { ResumeWordComponent } from '../../resume-word/resume-word.component';
 import { HighlightService } from './../../word-highlight.service';
-import { BackToHomeButtonComponent } from "../../../shared/components/back-to-home-button/back-to-home-button.component";
 
 type HighlightWord = string;
 type DisplayWord = string;
@@ -13,10 +13,18 @@ type CategoryName = string;
 
 @Component({
   selector: 'app-resume-page',
-  imports: [ResumeWordComponent, ToastComponent, ResumeDateRangeComponent, ResumeHelpSectionComponent, BackToHomeButtonComponent],
+  imports: [
+    ResumeWordComponent,
+    ToastComponent,
+    ResumeDateRangeComponent,
+    ResumeHelpSectionComponent,
+    BackToHomeButtonComponent,
+  ],
   templateUrl: './resume-page.component.html',
 })
-export class ResumePageComponent {
+export default class ResumePageComponent {
+  highlightService = inject(HighlightService);
+
   skillsAndAbilities: [CategoryName, Skill[]][] = [
     [
       'Frameworks and Technologies',
@@ -158,8 +166,6 @@ export class ResumePageComponent {
       ],
     ],
   ];
-
-  constructor(public highlightService: HighlightService) {}
 
   onCloseClick() {
     this.highlightService.selectedWord.set(undefined);

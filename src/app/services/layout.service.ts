@@ -1,11 +1,19 @@
-import { Injectable, Renderer2, RendererFactory2, signal } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2, signal, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { ThemeService } from './theme.service';
 
+/**
+ * Layout Service
+ *
+ * Handles layout-related functionality like menu state, breadcrumbs, and scroll management.
+ * Theme functionality has been moved to ThemeService.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
   private renderer: Renderer2;
+  private themeService = inject(ThemeService);
 
   mask = signal<boolean>(false);
   menu = signal<boolean>(false);
@@ -66,20 +74,16 @@ export class LayoutService {
     this.renderer.removeStyle(document.body, 'padding-right');
   }
 
-  toggleTheme() {
-
-    const currentTheme = this.getTheme();
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    console.log(`Switching theme from ${currentTheme} to ${newTheme}`);
-    this.setTheme(newTheme);
+  // Theme-related methods - delegated to ThemeService
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 
-  getTheme() {
-    return window.localStorage.getItem('theme');
+  getTheme(): string {
+    return this.themeService.getTheme();
   }
 
-  setTheme(theme = 'dark') {
-    window.localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute('data-theme', theme);
+  setTheme(theme: 'light' | 'dark'): void {
+    this.themeService.setTheme(theme);
   }
 }
