@@ -1,5 +1,5 @@
 @plugin "daisyui" {
-  themes: all;
+  themes: ["light", "dark"];
   exclude: scrollbar;
 }
 

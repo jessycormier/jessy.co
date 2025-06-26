@@ -37,7 +37,8 @@
             "styles": [
               "src/styles/main.css"
             ],
-            "scripts": ["node_modules/theme-change/index.js"]
+            "scripts": ["node_modules/theme-change/index.js"],
+            "allowedCommonJsDependencies": ["fault", "extend"]
           },
           "configurations": {
             "production": {

@@ -1,6 +1,5 @@
 <div
-  [ngClass]="isShown ? 'opacity-100' : 'translate-x-full sm:translate-x-0 sm:-translate-y-full opacity-0'"
-  class="fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl"
+  [class]="isShown ? 'opacity-100 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl' : 'translate-x-full sm:translate-x-0 sm:-translate-y-full opacity-0 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl'"
   (click)="onClose($event)"
   (keydown.enter)="onClose($event)"
   tabindex="0">

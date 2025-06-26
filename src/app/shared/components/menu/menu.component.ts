@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, effect, HostListener } from '@angular/core';
 import { ContentService } from '../../../content/services/content.service';
 import { LayoutService } from '../../../services/layout.service';
@@ -6,7 +5,7 @@ import { LinkComponent } from '../link/link.component';
 
 @Component({
   selector: 'app-menu',
-  imports: [LinkComponent, CommonModule],
+  imports: [LinkComponent],
   templateUrl: './menu.component.html',
 })
 export class MenuComponent {

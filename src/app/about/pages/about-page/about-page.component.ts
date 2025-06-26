@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgxTypedWriterModule } from 'ngx-typed-writer';
 
 @Component({
   selector: 'app-about-page',
-  imports: [CommonModule, NgxTypedWriterModule, MarkdownModule],
+  imports: [NgxTypedWriterModule, MarkdownModule],
   templateUrl: './about-page.component.html',
 })
 export default class AboutPageComponent implements OnInit {
