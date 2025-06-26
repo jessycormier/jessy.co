@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
 import { LinkComponent } from '../../../shared/components/link/link.component';
@@ -9,6 +9,8 @@ import { Content } from '../../interfaces/content.interface';
   templateUrl: './content-page.component.html',
 })
 export default class ContentPageComponent {
+  private route = inject(ActivatedRoute);
+
   data!: Content;
   id!: string;
   date!: string;
@@ -17,7 +19,7 @@ export default class ContentPageComponent {
   aiEditor = false;
   markdown!: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
     this.route.data.subscribe((data) => {
       this.data = data['content'] as Content;
       this.id = this.data.frontmatter.id;

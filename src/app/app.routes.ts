@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { contentResolver } from './content/content.resolver';
+import { contentGuard } from './content/content.guard';
 import HomePageComponent from './home/pages/home-page/home-page.component';
 import { CenterLayoutComponent } from './layouts/center-layout/center-layout.component';
 import { StandardLayoutComponent } from './layouts/standard-layout/standard-layout.component';
@@ -28,12 +29,14 @@ export const routes: Routes = [
       },
       {
         path: 'logs/:category/:id',
+        canActivate: [contentGuard],
         resolve: { content: contentResolver },
         title: 'Log | Jessy.co',
         loadComponent: () =>import('./content/pages/content-page/content-page.component'),
       },
       {
         path: 'logs/:category',
+        canActivate: [contentGuard],
         resolve: { items: contentResolver },
         title: 'Logs | Jessy.co',
         loadComponent: () => import('./content/pages/content-list-page/content-list-page.component'),

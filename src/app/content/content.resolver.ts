@@ -1,38 +1,23 @@
 import { inject } from '@angular/core';
-import { ResolveFn, Router } from '@angular/router';
-import { EMPTY, catchError } from 'rxjs';
+import { ResolveFn } from '@angular/router';
 import { ContentService } from './services/content.service';
 
+/**
+ * @note Guard has verified content for valid routes.
+ */
 export const contentResolver: ResolveFn<any | null> = (route) => {
   const contentService = inject(ContentService);
-  const router = inject(Router);
 
   const category = route.paramMap.get('category') || '';
   const id = route.paramMap.get('id');
 
-  // Post
   if (category && id) {
-    return contentService.getContent(category, id).pipe(
-      catchError((error) => {
-        console.error(`Error loading content for ${category}/${id}:`, error);
-        router.navigate(['/error/not-found']);
-        return EMPTY;
-      })
-    );
+    return contentService.getContent(category, id);
   }
-  // Category
   else if (category && !id) {
-    return contentService.getCategory(category).pipe(
-      catchError((error) => {
-        console.error(`Error loading category ${category}:`, error);
-        router.navigate(['/error/not-found']);
-        return EMPTY;
-      })
-    );
+    return contentService.getCategory(category);
   }
 
-  // Invalid route parameters
-  console.error('Invalid route parameters. Category and/or ID is missing.');
-  router.navigate(['/error/not-found']);
-  return EMPTY;
+  // This should never happen since the guard prevents invalid routes
+  return null;
 };
