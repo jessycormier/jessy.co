@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, afterNextRender, inject, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -6,8 +6,8 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { LayoutService } from './services/layout.service';
-import { MetaTagsService } from './services/meta-tags.service';
+import { LayoutService } from './shared/services/layout.service';
+import { MetaTagsService } from './shared/services/meta-tags.service';
 import { MaskComponent } from './shared/components/mask/mask.component';
 import { MenuComponent } from './shared/components/menu/menu.component';
 import { SkipToMainComponent } from './shared/components/skip-to-main/skip-to-main.component';
@@ -16,14 +16,22 @@ import { SkipToMainComponent } from './shared/components/skip-to-main/skip-to-ma
   selector: 'app-root',
   imports: [RouterOutlet, SkipToMainComponent, MaskComponent, MenuComponent],
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
+  private elementRef = inject(ElementRef);
+
   constructor(
     public layout: LayoutService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private metaTagsService: MetaTagsService
-  ) {}
+  ) {
+    afterNextRender(() => {
+      // Trigger fade-in animation after the app has rendered
+      this.elementRef.nativeElement.classList.add('app-loaded');
+    });
+  }
 
   ngOnInit() {
     // Listen for route changes and update meta tags from route data

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, map, throwError } from 'rxjs';
-import { UnifiedService } from '../../services/unified.service';
+import { UnifiedService } from '../../shared/services/unified.service';
 
 @Injectable({
   providedIn: 'root',
