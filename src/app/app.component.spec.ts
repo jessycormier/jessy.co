@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { LayoutService } from './services/layout.service';
-import { MetaTagsService } from './services/meta-tags.service';
+import { LayoutService } from './shared/services/layout.service';
+import { MetaTagsService } from './shared/services/meta-tags.service';
 import { of } from 'rxjs';
 
 describe('App', () => {
