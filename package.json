@@ -9,7 +9,10 @@
     "prebuild": "npm run index-builder",
     "watch": "ng build --watch --configuration development",
     "index-builder": "vite-node ./scripts/index-builder.ts",
-    "test": "ng test"
+    "test": "ng test --no-watch --browsers ChromeHeadless",
+    "test-watch": "ng test",
+    "test-deep": "ng test --no-watch --browsers ChromeHeadless --code-coverage"
+
   },
   "private": true,
   "dependencies": {
