@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark" class="min-h-full">
+<html lang="en" class="min-h-full">
   <head>
     <!-- Theme initialization script to prevent FOUC (Flash of Unstyled Content) -->
     <script src="/theme-init.js"></script>
@@ -76,6 +76,16 @@
       body {
         overflow-x: hidden;
         overflow-y: scroll;
+      }
+
+      /* Fade-in animation for app initialization */
+      app-root {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+      }
+
+      app-root.app-loaded {
+        opacity: 1;
       }
     </style>
   </head>

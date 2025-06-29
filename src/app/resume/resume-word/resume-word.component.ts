@@ -1,29 +1,44 @@
-import { Component, effect, HostBinding, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  effect,
+  input,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { HighlightService } from '../word-highlight.service';
 
 @Component({
   selector: 'app-resume-word',
   templateUrl: './resume-word.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.underline]': 'underline()',
+    '[class.highlight]': 'highlight()',
+    '(mouseup)': 'onMouseUp($event)',
+  },
 })
 export class ResumeWordComponent {
-  @Input() value?: string;
+  value = input<string>();
+  underline = input(true);
+  highlight = signal(false);
 
-  @Input()
-  @HostBinding('class.underline')
-  underline = true;
+  private highlightService = inject(HighlightService);
 
-  @HostBinding('class.highlight')
-  highlight = false;
-
-  @HostListener('mouseup', ['$event'])
-  onMouseUp(e: Event) {
-    e.preventDefault();
-    this.highlightService.selectedWord.set(this.highlightService.selectedWord() === this.value ? undefined : this.value);
-  }
-
-  constructor(private highlightService: HighlightService) {
+  constructor() {
     effect(() => {
-      this.highlight = this.highlightService.selectedWord() === this.value;
+      this.highlight.set(this.highlightService.selectedWord() === this.value());
     });
   }
+
+  onMouseUp(e: Event) {
+    e.preventDefault();
+    const currentValue = this.value();
+    this.highlightService.selectedWord.set(
+      this.highlightService.selectedWord() === currentValue
+        ? undefined
+        : currentValue
+    );
+  }
 }
+6;

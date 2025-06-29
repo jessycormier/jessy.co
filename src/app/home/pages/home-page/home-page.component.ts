@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentListItem } from '../../../content/interfaces/content-list-item.interface';
 import { ContentService } from '../../../content/services/content.service';
@@ -9,6 +9,7 @@ import { ComponentState } from '../../../shared/enums/component-state.enum';
   selector: 'app-home-page',
   imports: [ContentListItemComponent],
   templateUrl: './home-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class HomePageComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
@@ -16,6 +17,14 @@ export default class HomePageComponent implements OnInit {
   readonly ComponentState = ComponentState;
 
   latestItems!: ContentListItem[];
+
+  // Dummy item for loading placeholders
+  readonly dummyItem: ContentListItem = {
+    id: 'loading',
+    date: '',
+    title: '',
+    path: '',
+  };
 
   ngOnInit() {
     this.contentService

@@ -14,9 +14,9 @@
       <app-content-list-item [item]="item"></app-content-list-item>
     }
   } @placeholder (minimum 0ms) {
-    <app-content-list-item [state]="ComponentState.Loading"></app-content-list-item>
-    <app-content-list-item [state]="ComponentState.Loading" class="opacity-70"></app-content-list-item>
-    <app-content-list-item [state]="ComponentState.Loading" class="opacity-40"></app-content-list-item>
-    <app-content-list-item [state]="ComponentState.Loading" class="opacity-10"></app-content-list-item>
+    <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem"></app-content-list-item>
+    <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-70"></app-content-list-item>
+    <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-40"></app-content-list-item>
+    <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-10"></app-content-list-item>
   }
 </section>

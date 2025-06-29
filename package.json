@@ -9,7 +9,10 @@
     "prebuild": "npm run index-builder",
     "watch": "ng build --watch --configuration development",
     "index-builder": "vite-node ./scripts/index-builder.ts",
-    "test": "ng test"
+    "test": "ng test --no-watch --browsers ChromeHeadless",
+    "test-watch": "ng test",
+    "test-deep": "ng test --no-watch --browsers ChromeHeadless --code-coverage"
+
   },
   "private": true,
   "dependencies": {
@@ -22,6 +25,7 @@
     "@tailwindcss/postcss": "^4.1.10",
     "daisyui": "^5.0.43",
     "firacode": "^6.2.0",
+    "lucide-angular": "^0.523.0",
     "ngx-markdown": "^20.0.0",
     "ngx-typed-writer": "^1.5.1",
     "postcss": "^8.5.6",

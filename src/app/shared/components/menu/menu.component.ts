@@ -1,6 +1,6 @@
 import { Component, effect, HostListener } from '@angular/core';
 import { ContentService } from '../../../content/services/content.service';
-import { LayoutService } from '../../../services/layout.service';
+import { LayoutService } from '../../services/layout.service';
 import { LinkComponent } from '../link/link.component';
 
 @Component({
