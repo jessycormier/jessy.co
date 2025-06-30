@@ -1,6 +1,6 @@
-import { Component, effect, HostListener } from '@angular/core';
+import { Component, effect, HostListener, signal } from '@angular/core';
 import { ContentService } from '../../../content/services/content.service';
-import { LayoutService } from '../../../services/layout.service';
+import { LayoutService } from '../../services/layout.service';
 import { LinkComponent } from '../link/link.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { LinkComponent } from '../link/link.component';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent {
-  isShown = false;
+  isShown = signal(false);
   categories: {
     name: string;
     path: string;
@@ -22,7 +22,7 @@ export class MenuComponent {
       .subscribe((categories) => (this.categories = categories));
 
     effect(() => {
-      this.isShown = this.layout.menu();
+      this.isShown.set(this.layout.menu());
     });
   }
 

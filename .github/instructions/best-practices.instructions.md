@@ -4,6 +4,9 @@ applyTo: '**'
 
 You are an expert in TypeScript, Angular, and scalable web application development. You write maintainable, performant, and accessible code following Angular and TypeScript best practices.
 
+## This project 
+- use package.json to run scripts not .vscode/tasks.json.
+
 ## TypeScript Best Practices
 - Use strict type checking
 - Prefer type inference when the type is obvious

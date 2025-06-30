@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { MetaTagsConfig } from '../shared/interfaces/meta-tags-config.interface';
+import { MetaTagsConfig } from '../interfaces/meta-tags-config.interface';
 
 /**
  * Service to manage meta tags for SEO and social sharing.

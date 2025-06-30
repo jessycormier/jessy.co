@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LayoutService } from '../../../services/layout.service';
+import { LayoutService } from '../../services/layout.service';
 import { ThemeToggle } from '../theme-toggle/theme-toggle';
 import { BrandComponent } from '../brand/brand.component';
 import { LinkComponent } from '../link/link.component';

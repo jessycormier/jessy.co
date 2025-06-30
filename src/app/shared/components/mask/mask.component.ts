@@ -1,16 +1,16 @@
-import { Component, effect } from '@angular/core';
-import { LayoutService } from '../../../services/layout.service';
+import { Component, effect, signal } from '@angular/core';
+import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-mask',
   templateUrl: './mask.component.html',
 })
 export class MaskComponent {
-  isShown = false;
+  isShown = signal(false);
 
   constructor(private layout: LayoutService) {
     effect(() => {
-      this.isShown = this.layout.mask();
+      this.isShown.set(this.layout.mask());
     });
   }
 
