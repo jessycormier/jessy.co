@@ -1,5 +1,5 @@
 <div
-  [class]="isShown ? 'opacity-100 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl' : 'translate-x-full sm:translate-x-0 sm:-translate-y-full opacity-0 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl'"
+  [class]="isShown() ? 'opacity-100 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl' : 'opacity-0 pointer-events-none fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl translate-x-full sm:translate-x-0 sm:-translate-y-full'"
   (click)="onClose($event)"
   (keydown.enter)="onClose($event)"
   tabindex="0">
@@ -9,7 +9,7 @@
     (keydown.enter)="$event.stopPropagation()"
     tabindex="0">
     <div class="text-vertical absolute top-0 bottom-0 left-0 flex flex-row items-end justify-center">
-      <div class="strip animate-bg grow">&nbsp;</div>
+      <div class="strip grow">&nbsp;</div>
       <div class="px-4 text-center font-mono tracking-tighter">Site Navigation</div>
     </div>
     <div class="mb-2 ml-12 px-2 py-2 text-right">

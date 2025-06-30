@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
 
 @Component({
@@ -6,11 +6,11 @@ import { LayoutService } from '../../services/layout.service';
   templateUrl: './mask.component.html',
 })
 export class MaskComponent {
-  isShown = false;
+  isShown = signal(false);
 
   constructor(private layout: LayoutService) {
     effect(() => {
-      this.isShown = this.layout.mask();
+      this.isShown.set(this.layout.mask());
     });
   }
 
