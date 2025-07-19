@@ -1,5 +1,5 @@
 <div
-  [class]="isShown() ? 'opacity-100 z-10 fixed inset-0 max-w-full cursor-pointer bg-base-100/40 transition-all duration-300' : 'opacity-0 pointer-events-none -z-50 fixed inset-0 max-w-full cursor-pointer bg-base-100/40 transition-all duration-300'"
+  [class]="getMaskClasses()"
   (click)="onClick()"
   (keydown.enter)="onClick()"
   tabindex="0"

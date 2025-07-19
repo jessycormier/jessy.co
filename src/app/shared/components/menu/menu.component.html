@@ -1,5 +1,5 @@
 <div
-  [class]="isShown() ? 'opacity-100 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl' : 'opacity-0 pointer-events-none fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl translate-x-full sm:translate-x-0 sm:-translate-y-full'"
+  [class]="getMenuClasses()"
   (click)="onClose($event)"
   (keydown.enter)="onClose($event)"
   tabindex="0">
