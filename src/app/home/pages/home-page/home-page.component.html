@@ -9,14 +9,48 @@
     <h2>Latest</h2>
   </header>
 
-  @defer {
-    @for (item of latestItems; track $index) {
-      <app-content-list-item [item]="item"></app-content-list-item>
-    }
-  } @placeholder (minimum 0ms) {
+  @if (hasError()) {
+    <!-- Error state -->
+    <div class="mb-6 p-4 border-l-4 border-red-500 bg-red-50">
+      <div class="flex">
+        <div class="ml-3">
+          <p class="text-sm text-red-700">
+            There was an issue loading the latest posts. This might be due to a network problem.
+          </p>
+          <button
+            (click)="retryLoading()"
+            class="mt-2 text-sm text-red-800 underline hover:text-red-900">
+            Try again
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else if (isLoading()) {
+    <!-- Loading state -->
     <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem"></app-content-list-item>
     <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-70"></app-content-list-item>
     <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-40"></app-content-list-item>
     <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-10"></app-content-list-item>
+  } @else if (latestItems().length === 0) {
+    <!-- Empty state -->
+    <div class="mb-6 p-4 border-l-4 border-yellow-500 bg-yellow-50">
+      <div class="flex">
+        <div class="ml-3">
+          <p class="text-sm text-yellow-700">
+            No posts are currently available. This might be temporary.
+          </p>
+          <button
+            (click)="retryLoading()"
+            class="mt-2 text-sm text-yellow-800 underline hover:text-yellow-900">
+            Refresh
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Content loaded successfully -->
+    @for (item of latestItems(); track $index) {
+      <app-content-list-item [item]="item"></app-content-list-item>
+    }
   }
 </section>
