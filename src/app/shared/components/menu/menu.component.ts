@@ -1,4 +1,4 @@
-import { Component, effect, HostListener, signal } from '@angular/core';
+import { Component, effect, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { ContentService } from '../../../content/services/content.service';
 import { LayoutService } from '../../services/layout.service';
 import { LinkComponent } from '../link/link.component';
@@ -9,8 +9,8 @@ import { LinkComponent } from '../link/link.component';
   templateUrl: './menu.component.html',
 })
 export class MenuComponent {
-  isShown = signal(false);
-  private initialized = signal(false);
+  @ViewChild('menuDialog') menuDialog!: ElementRef<HTMLDialogElement>;
+
   categories: {
     name: string;
     path: string;
@@ -23,25 +23,19 @@ export class MenuComponent {
       .subscribe((categories) => (this.categories = categories));
 
     effect(() => {
-      this.isShown.set(this.layout.menu());
-      // Mark as initialized after the first effect run
-      if (!this.initialized()) {
-        this.initialized.set(true);
-      }
-    });
-  }
+      const isMenuOpen = this.layout.menu();
 
-  getMenuClasses(): string {
-    // If not initialized yet, ensure the menu is completely hidden
-    if (!this.initialized()) {
-      return 'opacity-0 pointer-events-none fixed inset-0 z-10 backdrop-blur-xl translate-x-full sm:translate-x-0 sm:-translate-y-full invisible';
-    }
-    
-    if (this.isShown()) {
-      return 'opacity-100 fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl';
-    } else {
-      return 'opacity-0 pointer-events-none fixed inset-0 z-10 transition-all duration-200 backdrop-blur-xl translate-x-full sm:translate-x-0 sm:-translate-y-full';
-    }
+      // Use setTimeout to ensure ViewChild is available
+      setTimeout(() => {
+        if (this.menuDialog?.nativeElement) {
+          if (isMenuOpen) {
+            this.menuDialog.nativeElement.showModal();
+          } else {
+            this.menuDialog.nativeElement.close();
+          }
+        }
+      });
+    });
   }
 
   onClose($event: Event) {

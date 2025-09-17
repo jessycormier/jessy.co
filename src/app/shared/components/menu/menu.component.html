@@ -1,13 +1,5 @@
-<div
-  [class]="getMenuClasses()"
-  (click)="onClose($event)"
-  (keydown.enter)="onClose($event)"
-  tabindex="0">
-  <div
-    class="fixed lg:inset-8 inset-0 max-w-full lg:max-w-2xl overflow-hidden bg-base-100 mx-auto shadow-lg"
-    (click)="$event.stopPropagation()"
-    (keydown.enter)="$event.stopPropagation()"
-    tabindex="0">
+<dialog #menuDialog class="modal" (close)="onClose($event)">
+  <div class="modal-box fixed lg:inset-8 inset-0 max-w-full lg:max-w-2xl overflow-hidden bg-base-100 mx-auto shadow-lg p-0">
     <div class="text-vertical absolute top-0 bottom-0 left-0 flex flex-row items-end justify-center">
       <div class="strip grow">&nbsp;</div>
       <div class="px-4 text-center font-mono tracking-tighter">Site Navigation</div>
@@ -41,4 +33,7 @@
       </div>
     </div>
   </div>
-</div>
+  <form method="dialog" class="modal-backdrop">
+    <button (click)="onClose($event)">close</button>
+  </form>
+</dialog>

@@ -4,10 +4,11 @@ import { ContentListItem } from '../../../content/interfaces/content-list-item.i
 import { ContentService } from '../../../content/services/content.service';
 import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
 import { ComponentState } from '../../../shared/enums/component-state.enum';
+import { IconsModule } from '../../../shared/icon.module';
 
 @Component({
   selector: 'app-home-page',
-  imports: [ContentListItemComponent],
+  imports: [ContentListItemComponent, IconsModule],
   templateUrl: './home-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

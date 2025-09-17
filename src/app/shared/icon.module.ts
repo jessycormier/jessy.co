@@ -4,11 +4,14 @@ import {
   ArrowRight,
   ArrowLeft,
   House,
+  Menu,
   Moon,
   Sun,
   X,
+  TriangleAlert,
   LucideAngularComponent,
   LucideAngularModule,
+  Frown,
 } from 'lucide-angular';
 
 @NgModule({
@@ -19,8 +22,11 @@ import {
       ArrowLeft,
       House,
       Moon,
+      Menu,
+      Frown,
       Sun,
       X,
+      TriangleAlert,
     }),
   ],
   exports: [LucideAngularComponent],

@@ -18,21 +18,19 @@ export const routes: Routes = [
       {
         path: 'about',
         title: 'About Jessy | Jessy.co',
-        loadComponent: () =>
-          import('./about/pages/about-page/about-page.component'),
+        loadComponent: () => import('./about/pages/about-page/about-page.component'),
       },
       {
         path: 'resume',
         title: 'Resume | Jessy.co',
-        loadComponent: () =>
-          import('./resume/pages/resume-page/resume-page.component'),
+        loadComponent: () => import('./resume/pages/resume-page/resume-page.component'),
       },
       {
         path: 'logs/:category/:id',
         canActivate: [contentGuard],
         resolve: { content: contentResolver },
         title: 'Log | Jessy.co',
-        loadComponent: () =>import('./content/pages/content-page/content-page.component'),
+        loadComponent: () => import('./content/pages/content-page/content-page.component'),
       },
       {
         path: 'logs/:category',
@@ -44,26 +42,28 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'design',
+    title: 'Design Test | Jessy.co',
+    loadComponent: () => import('./layouts/design-test-layout/design-test-layout'),
+  },
+  {
     path: 'error',
     component: CenterLayoutComponent,
     children: [
       {
         path: 'client',
         title: 'Client Error | Jessy.co',
-        loadComponent: () =>
-          import('./error/pages/status-418-page/status-418-page.component'),
+        loadComponent: () => import('./error/pages/status-418-page/status-418-page.component'),
       },
       {
         path: 'not-found',
         title: 'Page Not Found | Jessy.co',
-        loadComponent: () =>
-          import('./error/pages/status-404-page/status-404-page.component'),
+        loadComponent: () => import('./error/pages/status-404-page/status-404-page.component'),
       },
       {
         path: 'server-error',
         title: 'Server Error | Jessy.co',
-        loadComponent: () =>
-          import('./error/pages/status-500-page/status-500-page.component'),
+        loadComponent: () => import('./error/pages/status-500-page/status-500-page.component'),
       },
     ],
   },

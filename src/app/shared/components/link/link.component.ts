@@ -12,5 +12,5 @@ export class LinkComponent {
   @Input() href!: string;
 
   @HostBinding('attr.tabindex')
-  tabindex = '0';
+  tabindex = '-1';
 }

@@ -3,17 +3,16 @@ import { RouterLink } from '@angular/router';
 import { ContentListItem } from '../../../content/interfaces/content-list-item.interface';
 import { ComponentState } from '../../enums/component-state.enum';
 import { StatefulComponent } from '../../interfaces/stateful-component.interface';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-content-list-item',
-  imports: [RouterLink],
+  imports: [RouterLink, DatePipe],
   templateUrl: './content-list-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentListItemComponent implements StatefulComponent {
   ComponentState = ComponentState;
-
   state = input<ComponentState>(ComponentState.Ready); // Default will be ready.
-
   item = input.required<ContentListItem>();
 }

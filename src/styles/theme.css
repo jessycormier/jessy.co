@@ -1,74 +1,110 @@
+/* config */
 @plugin "daisyui" {
-  themes: ["light", "dark"];
-  exclude: scrollbar;
+  /* https://daisyui.com/docs/config/ */
+  themes: light --default, dark --prefersdark;
+  root: ":root";
+  exclude: rootscrollgutter;
+  /* scrollbar  */
+
 }
 
+/* light theme */
 @plugin "daisyui/theme" {
   name: "light";
-  default: true;
-  prefersdark: false;
   color-scheme: "light";
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(97% 0 0);
-  --color-base-300: oklch(92% 0 0);
-  --color-base-content: oklch(0% 0 0);
-  --color-primary: oklch(15.906% 0 0);
-  --color-primary-content: oklch(100% 0 0);
-  --color-secondary: oklch(21.455% 0.001 17.278);
-  --color-secondary-content: oklch(100% 0 0);
-  --color-accent: oklch(26.861% 0 0);
-  --color-accent-content: oklch(100% 0 0);
-  --color-neutral: oklch(0% 0 0);
-  --color-neutral-content: oklch(100% 0 0);
-  --color-info: oklch(74% 0.16 232.661);
-  --color-info-content: oklch(0% 0 0);
-  --color-success: oklch(89% 0.196 126.665);
-  --color-success-content: oklch(18.026% 0.03 164.14);
-  --color-warning: oklch(70% 0.213 47.604);
-  --color-warning-content: oklch(17.674% 0.027 79.94);
-  --color-error: oklch(63% 0.237 25.331);
-  --color-error-content: oklch(15.732% 0.03 28.47);
-  --radius-selector: 0rem;
-  --radius-field: 0rem;
-  --radius-box: 0rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 0;
-}
 
-@plugin "daisyui/theme" {
-  name: "dark";
-  default: false;
-  prefersdark: false;
-  color-scheme: "dark";
-  --color-base-100: oklch(0% 0 0);
-  --color-base-200: oklch(5% 0 0);
-  --color-base-300: oklch(10% 0 0);
-  --color-base-content: oklch(100% 0 0);
-  --color-primary: oklch(75.351% 0.138 232.661);
-  --color-primary-content: oklch(15.07% 0.027 232.661);
-  --color-secondary: oklch(68.011% 0.158 276.934);
-  --color-secondary-content: oklch(13.602% 0.031 276.934);
-  --color-accent: oklch(72.36% 0.176 350.048);
-  --color-accent-content: oklch(14.472% 0.035 350.048);
-  --color-neutral: oklch(27.949% 0.036 260.03);
-  --color-neutral-content: oklch(85.589% 0.007 260.03);
-  --color-info: oklch(68.455% 0.148 237.251);
-  --color-info-content: oklch(0% 0 0);
-  --color-success: oklch(78.452% 0.132 181.911);
-  --color-success-content: oklch(15.69% 0.026 181.911);
-  --color-warning: oklch(83.242% 0.139 82.95);
-  --color-warning-content: oklch(16.648% 0.027 82.95);
-  --color-error: oklch(71.785% 0.17 13.118);
-  --color-error-content: oklch(14.357% 0.034 13.118);
+  /* Base Layers */
+  --color-base-100: oklch(100% 0 0);          /* pure white */
+  --color-base-200: oklch(88% 0 0);           /* light gray */
+  --color-base-300: oklch(80% 0 0);           /* mid light gray */
+  --color-base-content: oklch(4% 0 0);        /* near black */
+
+  /* Neutral (slightly below base) */
+  --color-neutral: oklch(95% 0 0);            /* surface gray */
+  --color-neutral-content: oklch(5% 0 0);
+
+  /* Single Hue Strategy: Blue as the attention color */
+  --color-primary: oklch(65% 0.15 250);       /* medium blue, increased saturation */
+  --color-primary-content: oklch(10% 0 0);
+
+  --color-secondary: oklch(78% 0.08 255);     /* lighter slate, increased saturation */
+  --color-secondary-content: oklch(8% 0.03 340);
+
+  --color-accent: oklch(72% 0.16 240);        /* brighter blue, increased saturation */
+  --color-accent-content: oklch(10% 0 0);
+
+  /* Status Colors (kept subtle, not screaming) */
+  --color-info: oklch(82% 0.14 230);          /* lighter cyan, increased saturation */
+  --color-info-content: oklch(5% 0.03 230);
+
+  --color-success: oklch(78% 0.13 150);       /* lighter green, increased saturation */
+  --color-success-content: oklch(6% 0.04 150);
+
+  --color-warning: oklch(82% 0.30 85);        /* lighter amber, increased saturation */
+  --color-warning-content: oklch(5% 0.03 85);
+
+  --color-error: oklch(78% 0.20 25);          /* lighter red, increased saturation */
+  --color-error-content: oklch(5% 0.03 20);
+
+
+  /* Shapes & Effects */
   --radius-selector: 0rem;
   --radius-field: 0rem;
   --radius-box: 0rem;
   --size-selector: 0.1875rem;
   --size-field: 0.1875rem;
-  --border: 1px;
-  --depth: 0;
+  --border: 0.5px;
+  --depth: 1;
   --noise: 0;
+}
+
+
+/* dark theme */
+@plugin "daisyui/theme" {
+  name: "dark";
+  color-scheme: "dark";
+
+  /* Base Layers */
+  --color-base-100: oklch(0% 0 0);            /* true black */
+  --color-base-200: oklch(12% 0 0);           /* dark gray */
+  --color-base-300: oklch(20% 0 0);           /* mid dark gray */
+  --color-base-content: oklch(96% 0 0);       /* soft white */
+
+  /* Neutral (slightly above base) */
+  --color-neutral: oklch(26% 0 0);            /* surface gray */
+  --color-neutral-content: oklch(95% 0 0);
+
+  /* Single Hue Strategy: Blue as the attention color */
+  --color-primary: oklch(52% 0.11 250);       /* medium blue */
+  --color-primary-content: oklch(100% 0 0);
+
+  --color-secondary: oklch(36% 0.04 255);     /* muted slate */
+  --color-secondary-content: oklch(92% 0.02 340);
+
+  --color-accent: oklch(62% 0.12 240);        /* slightly brighter blue */
+  --color-accent-content: oklch(100% 0 0);
+
+  /* Status Colors (kept subtle, not screaming) */
+  --color-info: oklch(32% 0.10 230);          /* softer cyan */
+  --color-info-content: oklch(95% 0.02 230);
+
+  --color-success: oklch(38% 0.09 150);       /* dark green, muted */
+  --color-success-content: oklch(94% 0.03 150);
+
+  --color-warning: oklch(62% 0.25 85);        /* amber, softened */
+  --color-warning-content: oklch(96% 0.02 85);
+
+  --color-error: oklch(44% 0.15 25);          /* red, toned down */
+  --color-error-content: oklch(95% 0.02 20);
+
+  /* Shapes & Effects */
+  --radius-selector: 0rem;
+  --radius-field: 0rem;
+  --radius-box: 0rem;
+  --size-selector: 0.1875rem;
+  --size-field: 0.1875rem;
+  --border: 0.5px;
+  --depth: 1;
+  --noise: 0;
+
 }
