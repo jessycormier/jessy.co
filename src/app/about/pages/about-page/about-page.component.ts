@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgxTypedWriterModule } from 'ngx-typed-writer';
 
@@ -10,6 +10,7 @@ import { NgxTypedWriterModule } from 'ngx-typed-writer';
 export default class AboutPageComponent implements OnInit {
   profileImage = 'assets/profile/profile.jpg';
   iAm!: string[];
+  showAffiliateLinks = signal(false);
 
   ngOnInit() {
     this.iAm = this.shuffleArray([
@@ -32,6 +33,10 @@ export default class AboutPageComponent implements OnInit {
       'a explorer',
       'a creator',
     ]);
+  }
+
+  toggleAffiliateLinks() {
+    this.showAffiliateLinks.set(!this.showAffiliateLinks());
   }
 
   /**

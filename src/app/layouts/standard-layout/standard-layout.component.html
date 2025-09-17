@@ -1,7 +1,22 @@
-<div class="container max-w-5xl">
-  <div class="mx-4 xl:mx-0">
-    <app-header class="block pb-4"></app-header>
-    <router-outlet />
-    <app-footer class="opacity-40 hover:opacity-100 duration-1000 block transition-opacity"></app-footer>
+<div class="drawer min-h-screen">
+  <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" [checked]="layout.menu()" (change)="onDrawerToggle($event)" />
+
+  <!-- Main content -->
+  <div class="drawer-content">
+    <div class="container max-w-5xl">
+      <div class="mx-4 xl:mx-0">
+        <app-header class="block pb-4"></app-header>
+        <main>
+          <router-outlet />
+        </main>
+        <app-footer class="opacity-40 hover:opacity-100 duration-1000 block transition-opacity"></app-footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="drawer-side">
+    <label for="sidebar-drawer" class="drawer-overlay" aria-label="close sidebar"></label>
+    <app-sidebar></app-sidebar>
   </div>
 </div>

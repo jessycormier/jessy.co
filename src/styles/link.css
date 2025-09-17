@@ -53,5 +53,5 @@ app-link a span.indicator {
 }
 
 app-link a.active span.indicator {
-  @apply inline-block pr-1 text-base-300;
+  @apply inline-block pr-1 text-base-content;
 }

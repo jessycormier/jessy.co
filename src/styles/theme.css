@@ -18,34 +18,22 @@
   --color-base-200: oklch(88% 0 0);           /* light gray */
   --color-base-300: oklch(80% 0 0);           /* mid light gray */
   --color-base-content: oklch(4% 0 0);        /* near black */
-
-  /* Neutral (slightly below base) */
-  --color-neutral: oklch(95% 0 0);            /* surface gray */
-  --color-neutral-content: oklch(5% 0 0);
-
-  /* Single Hue Strategy: Blue as the attention color */
+  --color-neutral: oklch(14% 0.005 285.823);
+  --color-neutral-content: oklch(92% 0.004 286.32);
   --color-primary: oklch(65% 0.15 250);       /* medium blue, increased saturation */
   --color-primary-content: oklch(10% 0 0);
-
   --color-secondary: oklch(78% 0.08 255);     /* lighter slate, increased saturation */
   --color-secondary-content: oklch(8% 0.03 340);
-
   --color-accent: oklch(72% 0.16 240);        /* brighter blue, increased saturation */
   --color-accent-content: oklch(10% 0 0);
-
-  /* Status Colors (kept subtle, not screaming) */
   --color-info: oklch(82% 0.14 230);          /* lighter cyan, increased saturation */
   --color-info-content: oklch(5% 0.03 230);
-
   --color-success: oklch(78% 0.13 150);       /* lighter green, increased saturation */
   --color-success-content: oklch(6% 0.04 150);
-
   --color-warning: oklch(82% 0.30 85);        /* lighter amber, increased saturation */
   --color-warning-content: oklch(5% 0.03 85);
-
   --color-error: oklch(78% 0.20 25);          /* lighter red, increased saturation */
   --color-error-content: oklch(5% 0.03 20);
-
 
   /* Shapes & Effects */
   --radius-selector: 0rem;
@@ -54,7 +42,7 @@
   --size-selector: 0.1875rem;
   --size-field: 0.1875rem;
   --border: 0.5px;
-  --depth: 1;
+  --depth: 0;
   --noise: 0;
 }
 

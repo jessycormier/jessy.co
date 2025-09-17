@@ -40,6 +40,27 @@
   way more random in size and content... so really it's nothing like the affiliate links.
 </section>
 
+<div class="mx-auto my-8 max-w-2xl">
+  <div class="alert alert-info">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-6 w-6 shrink-0 stroke-current">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <div>
+      <h3 class="font-bold">Privacy First Approach</h3>
+      <div class="text-sm">
+        The affiliate links are behind a button to prevent automatic loading of third-party resources and cookies until you explicitly choose to view them. This keeps your browsing experience cleaner and more private.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-8 text-center">
+  <button (click)="toggleAffiliateLinks()" class="btn btn-primary">
+    {{ showAffiliateLinks() ? 'Hide' : 'Show' }} Affiliate Links
+  </button>
+</div>
+
+@if (showAffiliateLinks()) {
 <div class="mt-12 flex flex-wrap items-center justify-center gap-12">
   <div>
     <a href="https://app.daily.dev/jessyco">
@@ -72,4 +93,5 @@
       style="border: 0; border-radius: 6px"></iframe>
   </div>
 </div>
+}
 
