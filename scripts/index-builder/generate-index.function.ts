@@ -21,7 +21,24 @@ export async function generateIndexFile(rootDir: string) {
     .reduce((p, c) => (c || 0) + p);
 
   const catCount = categories.categories.length;
-  console.log(
-    `||| Total Logs: ${logCount} | Total Categories: ${catCount} | Index file updated/created at: ${outputPath}`
-  );
+
+  // Enhanced build log output
+  console.log('\n' + '='.repeat(80));
+  console.log('📊 CONTENT INDEX GENERATION COMPLETE');
+  console.log('='.repeat(80));
+  console.log(`📝 Total Posts:      ${logCount.toString().padStart(3)} posts`);
+  console.log(`📁 Total Categories: ${catCount.toString().padStart(3)} categories`);
+  console.log(`📍 Output Location:  ${outputPath}`);
+  console.log(`⏰ Generated At:     ${new Date().toLocaleString()}`);
+
+  // Category breakdown
+  if (categories.categories.length > 0) {
+    console.log('\n📋 Category Breakdown:');
+    categories.categories.forEach(cat => {
+      const itemCount = cat.items?.length || 0;
+      console.log(`   • ${cat.name.padEnd(15)} → ${itemCount.toString().padStart(2)} posts`);
+    });
+  }
+
+  console.log('='.repeat(80) + '\n');
 }

@@ -15,12 +15,21 @@ export default class ContentListPageComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   items: ContentListItem[] = [];
+  category: string = '';
 
   ngOnInit() {
     this.route.data
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data: Partial<ContentList>) => {
-        this.items = data['items'] || [];
+      .subscribe((data: any) => {
+        // Handle the case where data might be directly the items array (from original resolver)
+        // or an object with items and category (from new resolver)
+        if (Array.isArray(data)) {
+          this.items = data;
+          this.category = this.route.snapshot.paramMap.get('category') || '';
+        } else {
+          this.items = Array.isArray(data?.items) ? data.items : [];
+          this.category = data?.category || this.route.snapshot.paramMap.get('category') || '';
+        }
       });
   }
 }

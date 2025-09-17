@@ -38,7 +38,7 @@ export class ContentService {
         if (!categoryData) {
           throw new Error(`Category not found: ${category}`);
         }
-        return categoryData.items;
+        return Array.isArray(categoryData.items) ? categoryData.items : [];
       }),
       catchError((error) => this.handleContentError(error, 'category'))
     );
