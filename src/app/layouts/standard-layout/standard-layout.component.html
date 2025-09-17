@@ -1,5 +1,9 @@
 <div class="drawer min-h-screen">
-  <input id="sidebar-drawer" type="checkbox" class="drawer-toggle" [checked]="layout.menu()" (change)="onDrawerToggle($event)" />
+  <input
+    id="sidebar-drawer"
+    type="checkbox" class="drawer-toggle"
+    [checked]="layout.menu()"
+    (change)="onDrawerToggle($event)" />
 
   <!-- Main content -->
   <div class="drawer-content">
@@ -14,9 +18,11 @@
     </div>
   </div>
 
-  <!-- Sidebar -->
-  <div class="drawer-side">
-    <label for="sidebar-drawer" class="drawer-overlay" aria-label="close sidebar"></label>
-    <app-sidebar></app-sidebar>
-  </div>
+  <!-- Sidebar - only show when component is loaded -->
+  @if (isLoaded()) {
+    <div class="drawer-side">
+      <label for="sidebar-drawer" class="drawer-overlay" aria-label="close sidebar"></label>
+      <app-sidebar></app-sidebar>
+    </div>
+  }
 </div>

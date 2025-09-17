@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -10,9 +10,17 @@ import { LayoutService } from '../../shared/services/layout.service';
   imports: [RouterOutlet, FooterComponent, HeaderComponent, SidebarComponent],
   templateUrl: './standard-layout.component.html',
 })
-export class StandardLayoutComponent {
+export class StandardLayoutComponent implements OnInit {
   nowYear = new Date().getFullYear();
   protected layout = inject(LayoutService);
+  protected isLoaded = signal(false);
+
+  ngOnInit() {
+    // Use setTimeout to ensure the component is fully initialized
+    setTimeout(() => {
+      this.isLoaded.set(true);
+    }, 0);
+  }
 
   onDrawerToggle(event: Event) {
     const target = event.target as HTMLInputElement;
