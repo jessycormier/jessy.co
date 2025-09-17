@@ -55,23 +55,13 @@ export class LayoutService {
   openMenu() {
     this.mask.set(true);
     this.menu.set(true);
-    this.disableScroll();
+    // Dialog handles scroll management automatically
   }
 
   closeMenu() {
     this.mask.set(false);
     this.menu.set(false);
-    this.enableScroll();
-  }
-
-  private disableScroll() {
-    this.renderer.setStyle(document.body, 'overflow', 'hidden');
-    this.renderer.setStyle(document.body, 'padding-right', '16px'); // Adjust for scrollbar width
-  }
-
-  enableScroll() {
-    this.renderer.removeStyle(document.body, 'overflow');
-    this.renderer.removeStyle(document.body, 'padding-right');
+    // Dialog handles scroll management automatically
   }
 
   // Theme-related methods - delegated to ThemeService

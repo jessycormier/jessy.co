@@ -1,9 +1,8 @@
-<footer class="flex flex-col gap-4 items-center justify-between pb-8 pt-20">
-  <strong>Socials</strong>
+<footer class="flex flex-col gap-4 items-center justify-between">
   <div class="my-2 flex flex-row flex-wrap justify-center gap-2">
     @for (link of socialLinks; track link.href) {
       <app-link [href]="link.href">{{ link.text }}</app-link>
     }
   </div>
-  <app-brand size="sm" />
+  <!-- <app-brand /> -->
 </footer>

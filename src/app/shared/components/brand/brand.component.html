@@ -1,19 +1,6 @@
-<a routerLink="/" class="inline-flex items-center text-center font-mono">
-  @if (size() === "") {
-    <div class="mr-2 flex h-10 w-10 items-center justify-center bg-base-content px-1 text-2xl text-base-100">JC</div>
-
-    <span class="flex flex-row">
-      <span class="opacity-70">jessy</span>
-      <span class="opacity-40">.</span>
-      <span class="opacity-70">co</span>
-    </span>
-  } @else if (size() === "sm") {
-    <div class="mr-2 flex h-6 w-6 items-center justify-center bg-base-content px-1 text-base-100">JC</div>
-
-    <span class="group flex flex-row text-sm">
-      <span class="opacity-70">jessy</span>
-      <span class="opacity-40">.</span>
-      <span class="opacity-70">co</span>
-    </span>
-  }
+<a routerLink="/" class="items-center font-mono group transition-all duration-700">
+  <span class="opacity-70 group-hover:opacity-100 duration-700">jessy</span>
+  <span class="opacity-40 group-hover:opacity-100 duration-700">.</span>
+  <span class="opacity-70 group-hover:opacity-100 duration-700">co</span>
 </a>
+

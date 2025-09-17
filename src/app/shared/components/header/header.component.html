@@ -1,12 +1,36 @@
-<header class="py-8">
+<header>
   <div class="flex flex-row items-center justify-start gap-2">
-    <app-brand class="relative block top-[1px]" />
+    <!-- <div class="group flex items-center relative">
+      <div class="w-0 group-hover:w-12 group-focus-within:w-12 lg:w-0 overflow-hidden transition-all duration-300 ease-in-out flex items-center justify-center">
+        <button
+          (click)="layout.openMenu()"
+          class="btn btn-xs btn-link text-base-content opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 lg:opacity-0 lg:group-hover:opacity-0 transition-all duration-300 ease-in-out"
+          aria-label="Open sidebar menu"
+        >
+          <lucide-icon tabindex="-1" name="Menu" [size]="16" class="relative top-[1px]"></lucide-icon>
+        </button>
+      </div>
+
+      <button (click)="layout.openMenu()" class="btn btn-xs btn-ghost lg:hidden mr-2" aria-label="Open sidebar menu">
+        <lucide-icon name="Menu" [size]="16"></lucide-icon>
+      </button>
+      <app-brand></app-brand>
+    </div> -->
+
+    <div class="flex items-center gap-2">
+      <!-- Menu button - visible on all screen sizes -->
+      <button (click)="layout.openMenu()" class="btn btn-xs btn-ghost relative top-[2px]" aria-label="Open sidebar menu">
+        <lucide-icon name="Menu" [size]="16"></lucide-icon>
+      </button>
+      <app-brand></app-brand>
+    </div>
+
     <div class="line-clamp-1 gap-2 text-base-content/40">
-      @for (item of layout.breadcrumb; track $index) { / {{ item }}
+      @for (item of layout.breadcrumb; track $index) {
+        / {{ item }}
       }
     </div>
     <div class="grow"></div>
     <app-theme-toggle class="relative block top-[1px]" />
-    <app-link (click)="layout.openMenu()">Menu</app-link>
   </div>
 </header>

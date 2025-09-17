@@ -1,0 +1,9 @@
+{
+  "watch": ["public/content"],
+  "ext": "md",
+  "exec": "npm run content-index-builder",
+  "delay": 5000,
+  "colours": true,
+  "legacyWatch": false,
+  "verbose": true
+}

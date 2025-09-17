@@ -9,12 +9,11 @@ import { filter } from 'rxjs/operators';
 import { LayoutService } from './shared/services/layout.service';
 import { MetaTagsService } from './shared/services/meta-tags.service';
 import { MaskComponent } from './shared/components/mask/mask.component';
-import { MenuComponent } from './shared/components/menu/menu.component';
 import { SkipToMainComponent } from './shared/components/skip-to-main/skip-to-main.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, SkipToMainComponent, MaskComponent, MenuComponent],
+  imports: [RouterOutlet, SkipToMainComponent, MaskComponent],
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

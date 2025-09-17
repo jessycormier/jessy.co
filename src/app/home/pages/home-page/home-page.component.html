@@ -1,28 +1,19 @@
-<article class="prose-xl min-w-full">
-  <h1>Hey, Welcome</h1>
-  <p>
-    This is my space to tinker, think <em>out loud</em>, and share the messy process of building things.
-  </p>
-</article>
-<section>
-  <header class="prose-xl mb-12 min-w-full">
-    <h2>Latest</h2>
-  </header>
+<section class="prose-lg my-12 min-w-full">
+  <h1>Hi I'm Jessy.</h1>
 
+  <p>
+    Hey, thanks for stopping by. You've stumbled upon my personal site. I'll be using this space to ramble, dump thoughts, and write in things. I call these
+    logs, which are just posts.
+  </p>
+
+  <h2>Latest Logs</h2>
   @if (hasError()) {
     <!-- Error state -->
-    <div class="mb-6 p-4 border-l-4 border-red-500 bg-red-50">
-      <div class="flex">
-        <div class="ml-3">
-          <p class="text-sm text-red-700">
-            There was an issue loading the latest posts. This might be due to a network problem.
-          </p>
-          <button
-            (click)="retryLoading()"
-            class="mt-2 text-sm text-red-800 underline hover:text-red-900">
-            Try again
-          </button>
-        </div>
+    <div role="alert" class="alert alert-error">
+      <lucide-icon [name]="'Frown'" [size]="18"></lucide-icon>
+      <span>There was an issue loading the latest posts. This might be due to a network problem.</span>
+      <div>
+        <button (click)="retryLoading()" class="btn btn-sm">Try again</button>
       </div>
     </div>
   } @else if (isLoading()) {
@@ -33,18 +24,11 @@
     <app-content-list-item [state]="ComponentState.Loading" [item]="dummyItem" class="opacity-10"></app-content-list-item>
   } @else if (latestItems().length === 0) {
     <!-- Empty state -->
-    <div class="mb-6 p-4 border-l-4 border-yellow-500 bg-yellow-50">
-      <div class="flex">
-        <div class="ml-3">
-          <p class="text-sm text-yellow-700">
-            No posts are currently available. This might be temporary.
-          </p>
-          <button
-            (click)="retryLoading()"
-            class="mt-2 text-sm text-yellow-800 underline hover:text-yellow-900">
-            Refresh
-          </button>
-        </div>
+    <div role="alert" class="alert alert-warning">
+      <lucide-icon [name]="'TriangleAlert'" [size]="18"></lucide-icon>
+      <span>Fetching posts worked, but found none...</span>
+      <div>
+        <button (click)="retryLoading()" class="btn btn-sm">Try again</button>
       </div>
     </div>
   } @else {

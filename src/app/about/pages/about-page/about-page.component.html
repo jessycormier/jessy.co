@@ -35,11 +35,18 @@
   </div>
 </section>
 
-<section class="prose-xl my-12 min-w-full">
+<section class="prose-lg my-12 min-w-full">
   I'll include a few random embeds from different platforms. Think of it like the old school affiliate links on the bottom of Angelfire / Geocities pages but
   way more random in size and content... so really it's nothing like the affiliate links.
 </section>
 
+<div class="my-8 text-center">
+  <button (click)="toggleAffiliateLinks()" class="btn btn-primary">
+    {{ showAffiliateLinks() ? 'Hide' : 'Show' }} Affiliate Links
+  </button>
+</div>
+
+@if (showAffiliateLinks()) {
 <div class="mt-12 flex flex-wrap items-center justify-center gap-12">
   <div>
     <a href="https://app.daily.dev/jessyco">
@@ -72,4 +79,5 @@
       style="border: 0; border-radius: 6px"></iframe>
   </div>
 </div>
+}
 

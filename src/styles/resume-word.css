@@ -1,16 +1,17 @@
 app-resume-word {
   @apply inline-flex transition-all;
-  @apply text-info;
-  @apply hover:text-info;
+  @apply text-accent;
+  @apply hover:text-warning;
   @apply cursor-pointer; /* select-none */
 }
 
 app-resume-word.underline {
   @apply underline decoration-secondary/25 decoration-2 underline-offset-2;
-  @apply hover:decoration-primary hover:decoration-dashed hover:underline-offset-4;
+  @apply hover:decoration-warning hover:decoration-dashed hover:underline-offset-4;
 }
 
 app-resume-word.highlight {
   @apply font-extrabold;
-  @apply decoration-primary decoration-dashed underline-offset-4;
+  @apply text-warning;
+  @apply decoration-warning decoration-dashed underline-offset-4;
 }

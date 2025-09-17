@@ -26,12 +26,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "ignore": [""]
               },
               {
                 "glob": "**/*",
                 "input": "node_modules/@tonsky/firacode",
-                "output": "assets/fonts/firacode"
+                "output": "fonts/firacode"
               }
             ],
             "styles": [
@@ -71,7 +72,8 @@
               "buildTarget": "jessyco:build:production"
             },
             "development": {
-              "buildTarget": "jessyco:build:development"
+              "buildTarget": "jessyco:build:development",
+              "hmr": true
             }
           },
           "defaultConfiguration": "development"
@@ -91,12 +93,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "ignore": [""]
               },
               {
                 "glob": "**/*",
                 "input": "node_modules/@tonsky/firacode",
-                "output": "assets/fonts/firacode"
+                "output": "fonts/firacode"
               }
             ],
             "styles": [

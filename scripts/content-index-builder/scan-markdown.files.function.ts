@@ -4,10 +4,10 @@ import { extractFrontmatter } from './extract-frontmatter.function';
 import { getMarkdownFiles } from './get-markdown-files.function';
 import { getSubdirectories } from './get-sub-directories.function';
 import { MarkdownItem } from './markdown-item.interface';
+import config from '../content-index-builder.config';
 
-const ROOT_ROUTE = 'logs';
 
-interface CategoriesAndLatest {
+export interface CategoriesAndLatest {
   categories: Category[];
   latest?: MarkdownItem[];
 }
@@ -20,7 +20,7 @@ export async function scanMarkdownFiles(rootDir: string): Promise<CategoriesAndL
   for (const subdir of subDirs) {
     const dirPath = path.join(rootDir, subdir);
     const files = getMarkdownFiles(dirPath);
-    const routePath = ROOT_ROUTE + '/' + subdir;
+    const routePath = config.ROOT_ROUTE + '/' + subdir;
     const name = subdir.replace(/-/g, ' ');
 
     const items = files.map((filePath) => extractFrontmatter(routePath, filePath)).filter(Boolean) as MarkdownItem[];
@@ -37,6 +37,6 @@ export async function scanMarkdownFiles(rootDir: string): Promise<CategoriesAndL
 
   return {
     categories,
-    latest: sortedItems.slice(0, 10),
+    latest: sortedItems.slice(0, config.latestAmount),
   } as CategoriesAndLatest;
 }

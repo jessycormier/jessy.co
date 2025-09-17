@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "./theme.css";
+@import 'tailwindcss';
+@import './theme.css';
 @plugin "@tailwindcss/typography";
 
 /* Theme transition and FOUC prevention */
@@ -9,78 +9,41 @@
 
 html {
   /* Smooth theme transitions */
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+html,
+body {
+  /* improve glyph rendering (fonts & icons) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* This is to enable dark mode via css class */
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 
 @font-face {
-  font-family: "Fira Code";
+  font-family: 'Fira Code';
   src:
-    url("/assets/fonts/firacode/woff2/FiraCode-Regular.woff2") format("woff2"),
-    url("/assets/fonts/firacode/ttf/FiraCode-Regular.ttf") format("truetype");
+    url('/fonts/firacode/woff2/FiraCode-Regular.woff2') format('woff2'),
+    url('/fonts/firacode/ttf/FiraCode-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
-
-@theme {
-  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: "Fire Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-
-  @keyframes text-blink {
-    0%,
-    100% {
-      color: var(--color-base-content);
-
-    }
-    50% {
-      color: var(--color-base-100);
-    }
-  }
-
-  @keyframes text-pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-
-  --animate-text-blink: text-blink 1s infinite;
-  --animate-text-pulse: text-pulse 1200ms cubic-bezier(0, 1.163, 0.106, 0.943) infinite;
 }
 
 @layer base {
   html,
   body {
+    /* scrollbar-color: var(--color-base-300); */
     @apply antialiased;
-    scrollbar-color: var(--color-base-300);
   }
-
-  body {
-    overflow-y: scroll;
-    /* scroll bar showing/hiding happens in layout service */
-  }
-
-
-  ::selection {
-    background-color: var(--color-primary);
-    color: var(--color-primary-content);
-    /* background-color: var(--fm-selection-color-bg);
-    color: var(--fm-selection-color); */
-  }
-
-  /*
-  *:focus {
-    @apply outline-yellow-500 ring;
-  } */
 
   ::selection {
     background-color: var(--color-yellow-400);
+    color: var(--color-primary-content);
   }
 
   p {
@@ -92,7 +55,7 @@ html {
     @apply pl-8;
   }
   ul li {
-    list-style-type: "- ";
+    list-style-type: '- ';
   }
   ol {
     list-style-position: inside;
@@ -107,7 +70,6 @@ html {
     @apply my-2 px-2 py-1;
     @apply bg-base-100 text-base-content;
   }
-
 
   blockquote {
     @apply relative;
@@ -143,21 +105,33 @@ html {
   }
 
   .comma-list li::after {
-    content: ",\00A0";
+    content: ',\00A0';
     white-space: nowrap;
   }
 
   .comma-list li:last-child::after {
-    content: "";
+    content: '';
   }
 }
 
 /* Components */
-@import "./link.css";
-@import "./resume-word.css";
-
+@import './link.css';
+@import './resume-word.css';
 
 @layer utilities {
+  /* improve SVG/icon crispness for inline icon components */
+  lucide-icon,
+  lucide-icon svg,
+  svg.icon,
+  svg {
+    shape-rendering: geometricPrecision; /* better vector curves */
+    vector-effect: non-scaling-stroke; /* keep stroke widths consistent */
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: transform;
+  }
+
   .text-vertical {
     @apply rotate-180;
     writing-mode: vertical-lr;

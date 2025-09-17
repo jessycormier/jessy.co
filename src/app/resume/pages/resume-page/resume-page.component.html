@@ -3,7 +3,7 @@
   (close)="onCloseClick()"
   [show]="highlightService.selectedWord() !== undefined">
   Highlighted Topic:
-  <em>{{ highlightService.selectedWord() }}</em>
+  <em class="animate-pulse font-bold">{{ highlightService.selectedWord() }}</em>
 </app-toast>
 
 <article class="font-mono">
