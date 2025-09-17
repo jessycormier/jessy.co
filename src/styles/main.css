@@ -28,8 +28,8 @@ body {
 @font-face {
   font-family: 'Fira Code';
   src:
-    url('/assets/fonts/firacode/woff2/FiraCode-Regular.woff2') format('woff2'),
-    url('/assets/fonts/firacode/ttf/FiraCode-Regular.ttf') format('truetype');
+    url('/fonts/firacode/woff2/FiraCode-Regular.woff2') format('woff2'),
+    url('/fonts/firacode/ttf/FiraCode-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

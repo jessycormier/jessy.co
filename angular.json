@@ -31,7 +31,7 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/@tonsky/firacode",
-                "output": "assets/fonts/firacode"
+                "output": "fonts/firacode"
               }
             ],
             "styles": [
@@ -96,7 +96,7 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/@tonsky/firacode",
-                "output": "assets/fonts/firacode"
+                "output": "fonts/firacode"
               }
             ],
             "styles": [

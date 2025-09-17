@@ -18,7 +18,7 @@ export class MetaTagsService {
     description: "Hi, I'm Jessy welcome to my website",
     keywords: 'jessyco, jessy, developer, blog, portfolio',
     author: 'Jessy',
-    image: 'https://jessy.co/assets/favicon-512x512.png',
+    image: 'https://jessy.co/favicon-512x512.png',
     url: 'https://jessy.co/',
     type: 'website',
     siteName: 'Jessy.co',
@@ -103,7 +103,7 @@ export class MetaTagsService {
         name: config.siteName,
         logo: {
           '@type': 'ImageObject',
-          url: 'https://jessy.co/assets/favicon-512x512.png',
+          url: 'https://jessy.co/favicon-512x512.png',
         },
       },
       datePublished: config.publishedDate,
@@ -187,7 +187,7 @@ export class MetaTagsService {
       url: `${baseUrl}/${categoryPath}/${frontmatter.id}`,
       type: 'article',
       publishedDate: frontmatter.date ? new Date(frontmatter.date).toISOString() : undefined,
-      image: `${baseUrl}/assets/profile/profile.jpg`, // You can customize this per article if needed
+      image: `${baseUrl}/profile/profile.jpg`, // You can customize this per article if needed
     };
   }
   generateCategoryMetaTags(category: string): MetaTagsConfig {

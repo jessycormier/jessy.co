@@ -8,7 +8,7 @@ import { NgxTypedWriterModule } from 'ngx-typed-writer';
   templateUrl: './about-page.component.html',
 })
 export default class AboutPageComponent implements OnInit {
-  profileImage = 'assets/profile/profile.jpg';
+  profileImage = 'profile/profile.jpg';
   iAm!: string[];
   showAffiliateLinks = signal(false);
 
