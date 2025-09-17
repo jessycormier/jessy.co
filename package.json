@@ -4,11 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "prestart": "npm run index-builder",
+    "prestart": "npm run content-index-builder",
+    "start:watch": "concurrently \"npm run content-watch\" \"ng serve --host 0.0.0.0\"",
     "build": "ng build",
-    "prebuild": "npm run index-builder",
+    "prebuild": "npm run content-index-builder",
     "watch": "ng build --watch --configuration development",
-    "index-builder": "vite-node ./scripts/index-builder.ts",
+    "content-index-builder": "vite-node ./scripts/content-index-builder.ts",
+    "content-watch": "nodemon --watch public/content --ext md --exec \"npm run content-index-builder\"",
+    "precontent-watch":"npm run content-index-builder",
     "test": "ng test --no-watch --browsers ChromeHeadless",
     "test-watch": "ng test",
     "test-deep": "ng test --no-watch --browsers ChromeHeadless --code-coverage",
@@ -51,6 +54,7 @@
     "@angular/compiler-cli": "^20.3.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/jasmine": "~5.1.0",
+    "concurrently": "^9.2.1",
     "http-server": "^14.1.1",
     "jasmine-core": "~5.7.0",
     "karma": "~6.4.0",
@@ -58,6 +62,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "typescript": "~5.8.2"
   }

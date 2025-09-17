@@ -4,10 +4,10 @@ import { extractFrontmatter } from './extract-frontmatter.function';
 import { getMarkdownFiles } from './get-markdown-files.function';
 import { getSubdirectories } from './get-sub-directories.function';
 import { MarkdownItem } from './markdown-item.interface';
-import config from '../config';
+import config from '../content-index-builder.config';
 
 
-interface CategoriesAndLatest {
+export interface CategoriesAndLatest {
   categories: Category[];
   latest?: MarkdownItem[];
 }

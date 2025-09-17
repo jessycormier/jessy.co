@@ -75,7 +75,7 @@ export class ContentService {
       .get<{
         categories: { name: string; path: string; count: number; items?: [] }[];
         latest: { id: string; date: string; title: string; path: string }[];
-      }>(`content/index.json`, { responseType: 'json' })
+      }>(`content.json`, { responseType: 'json' })
       .pipe(
         timeout(10000), // 10 second timeout
         retry(2) // Retry up to 2 times for network issues

@@ -4,8 +4,8 @@
 .vercel
 .angular
 /_
-public/content/index.json
-public/content/routes.txt
+public/content.json
+public/routes.txt
 
 
 # Compiled output
