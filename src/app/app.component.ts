@@ -1,10 +1,5 @@
-import { Component, OnInit, afterNextRender, inject, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterOutlet,
-} from '@angular/router';
+import { Component, OnInit, inject, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LayoutService } from './shared/services/layout.service';
 import { MetaTagsService } from './shared/services/meta-tags.service';
@@ -24,36 +19,29 @@ export class AppComponent implements OnInit {
     public layout: LayoutService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private metaTagsService: MetaTagsService
-  ) {
-    afterNextRender(() => {
-      // Trigger fade-in animation after the app has rendered
-      this.elementRef.nativeElement.classList.add('app-loaded');
-    });
-  }
+    private metaTagsService: MetaTagsService,
+  ) {}
 
   ngOnInit() {
     // Listen for route changes and update meta tags from route data
-    this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        let route = this.activatedRoute;
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
+      let route = this.activatedRoute;
 
-        while (route.firstChild) {
-          route = route.firstChild;
-        }
+      while (route.firstChild) {
+        route = route.firstChild;
+      }
 
-        const metaData = route.snapshot.data?.['meta'];
+      const metaData = route.snapshot.data?.['meta'];
 
-        if (metaData) {
-          this.metaTagsService.updateTags({
-            title: metaData.title,
-            description: metaData.description,
-            keywords: metaData.keywords,
-            url: `https://jessy.co${this.router.url}`,
-            type: metaData.type || 'website',
-          });
-        }
-      });
+      if (metaData) {
+        this.metaTagsService.updateTags({
+          title: metaData.title,
+          description: metaData.description,
+          keywords: metaData.keywords,
+          url: `https://jessy.co${this.router.url}`,
+          type: metaData.type || 'website',
+        });
+      }
+    });
   }
 }

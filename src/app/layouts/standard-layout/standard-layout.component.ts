@@ -20,7 +20,7 @@ export class StandardLayoutComponent implements OnInit {
     // Use setTimeout to ensure the component is fully initialized
     setTimeout(() => {
       this.isLoaded.set(true);
-    }, 0);
+    }, 200);
   }
 
   onDrawerToggle(event: Event) {
