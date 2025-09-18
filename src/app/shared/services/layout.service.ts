@@ -18,7 +18,7 @@ export class LayoutService {
   mask = signal<boolean>(false);
   menu = signal<boolean>(false);
 
-  breadcrumb: string[] = [];
+  breadcrumb = signal<string[]>([]);
 
   constructor(
     private router: Router,
@@ -28,17 +28,19 @@ export class LayoutService {
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.breadcrumb = event.url.split('/').filter((s) => s.length > 0);
+        let breadcrumb = event.url.split('/').filter((s) => s.length > 0);
         if (event.url === '/') {
-          this.breadcrumb = ['home'];
+          breadcrumb = ['home'];
         }
 
         // Split out the last item for now for visual reasons.
         // I may want to create slots for each visual part so I can better
         // control what shows on different screen sizes..
-        if (this.breadcrumb.length === 2) {
-          this.breadcrumb = this.breadcrumb.slice(0, 1);
+        if (breadcrumb.length === 2) {
+          breadcrumb = breadcrumb.slice(0, 1);
         }
+
+        this.breadcrumb.set(breadcrumb);
 
         if (this.menu()) {
           this.closeMenu();

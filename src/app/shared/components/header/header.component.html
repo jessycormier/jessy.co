@@ -25,11 +25,25 @@
       <app-brand></app-brand>
     </div>
 
+    <!-- Start: Breadcrumb -->
     <div class="line-clamp-1 gap-2 text-base-content/40">
-      @for (item of layout.breadcrumb; track $index) {
-        / {{ item }}
+      @for (item of layout.breadcrumb(); track $index; let isLast = $last; let isFirst = $first) {
+        /
+        @if (isLast) {
+          <!-- Current page - no link -->
+          <span class="text-base-content/80">{{ item }}</span>
+        } @else {
+          <!-- Clickable breadcrumb link -->
+          <a
+            [routerLink]="getBreadcrumbUrl($index)"
+            class="text-base-content/60 hover:text-base-content/80 transition-colors"
+          >
+            {{ item }}
+          </a>
+        }
       }
     </div>
+    <!-- End: Breadcrumb -->
     <div class="grow"></div>
     <app-theme-toggle class="relative block top-[1px]" />
   </div>

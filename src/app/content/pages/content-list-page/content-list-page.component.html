@@ -1,16 +1,16 @@
 <header class="my-12">
   <div class="flex items-end justify-between border-b border-base-300 pb-4">
     <div>
-      <h1 class="text-4xl font-bold capitalize text-base-content">{{ category }}</h1>
+      <h1 class="text-4xl font-bold capitalize text-base-content">{{ category() }}</h1>
       <p class="mt-2 text-base-content/70">
-        {{ items.length }} {{ items.length === 1 ? 'item' : 'items' }} available
+        {{ items().length }} {{ items().length === 1 ? 'item' : 'items' }} available
       </p>
     </div>
     <div class="text-right">
       <div class="stats stats-horizontal">
         <div class="stat">
           <div class="stat-title">Total Posts</div>
-          <div class="stat-value text-2xl">{{ items.length }}</div>
+          <div class="stat-value text-2xl">{{ items().length }}</div>
         </div>
       </div>
     </div>
@@ -18,12 +18,12 @@
 </header>
 
 <main class="mt-10">
-  @if (items.length === 0) {
+  @if (items().length === 0) {
     <div class="text-center py-12">
       <div class="text-base-content/50 text-lg">No items found in this category</div>
     </div>
   } @else {
-    @for (item of items; track $index) {
+    @for (item of items(); track $index) {
       <app-content-list-item [item]="item"></app-content-list-item>
     }
   }

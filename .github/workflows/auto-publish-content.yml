@@ -1,0 +1,44 @@
+name: Auto Publish Content Branch
+
+on:
+  push:
+    branches:
+      - main
+      - content
+
+jobs:
+  sync-main-to-content:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout content branch
+        uses: actions/checkout@v4
+        with:
+          ref: content
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge main into content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin main
+          git merge --no-edit origin/main || exit 0
+          git push origin content
+
+  publish-content-to-main:
+    if: github.ref == 'refs/heads/content'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge content into main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin content
+          git merge --no-edit origin/content || exit 0
+          git push origin main

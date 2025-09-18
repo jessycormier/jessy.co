@@ -1,5 +1,6 @@
-import { Component, OnInit, afterNextRender, inject, ElementRef, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, afterNextRender, inject, ElementRef, ChangeDetectionStrategy, signal, effect } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs/operators';
 import { LayoutService } from './shared/services/layout.service';
 import { MetaTagsService } from './shared/services/meta-tags.service';
@@ -12,16 +13,22 @@ import { SkipToMainComponent } from './shared/components/skip-to-main/skip-to-ma
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private elementRef = inject(ElementRef);
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private metaTagsService = inject(MetaTagsService);
+  public layout = inject(LayoutService);
+
   isLoaded = signal(false);
 
-  constructor(
-    public layout: LayoutService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private metaTagsService: MetaTagsService,
-  ) {
+  // Convert router events to signal for navigation end events
+  private navigationEndEvents = toSignal(
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)),
+    { initialValue: null }
+  );
+
+  constructor() {
     afterNextRender(() => {
       // Trigger fade-in animation after the app has rendered
       this.elementRef.nativeElement.classList.add('app-loaded');
@@ -30,27 +37,29 @@ export class AppComponent implements OnInit {
         this.isLoaded.set(true);
       }, 100); // Match this duration with your CSS transition duration
     });
-  }
 
-  ngOnInit() {
-    // Listen for route changes and update meta tags from route data
-    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
-      let route = this.activatedRoute;
+    // Use effect to handle route changes and update meta tags
+    effect(() => {
+      const navigationEvent = this.navigationEndEvents();
 
-      while (route.firstChild) {
-        route = route.firstChild;
-      }
+      if (navigationEvent) {
+        let route = this.activatedRoute;
 
-      const metaData = route.snapshot.data?.['meta'];
+        while (route.firstChild) {
+          route = route.firstChild;
+        }
 
-      if (metaData) {
-        this.metaTagsService.updateTags({
-          title: metaData.title,
-          description: metaData.description,
-          keywords: metaData.keywords,
-          url: `https://jessy.co${this.router.url}`,
-          type: metaData.type || 'website',
-        });
+        const metaData = route.snapshot.data?.['meta'];
+
+        if (metaData) {
+          this.metaTagsService.updateTags({
+            title: metaData.title,
+            description: metaData.description,
+            keywords: metaData.keywords,
+            url: `https://jessy.co${this.router.url}`,
+            type: metaData.type || 'website',
+          });
+        }
       }
     });
   }

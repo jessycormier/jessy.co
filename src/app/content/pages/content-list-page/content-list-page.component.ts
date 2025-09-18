@@ -1,6 +1,6 @@
-import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy, signal, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
 import { ContentListItem } from '../../interfaces/content-list-item.interface';
 import { ContentList } from '../../interfaces/content-list.interface';
@@ -11,26 +11,36 @@ import { ContentList } from '../../interfaces/content-list.interface';
   templateUrl: './content-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ContentListPageComponent implements OnInit {
+export default class ContentListPageComponent {
   private route = inject(ActivatedRoute);
-  private destroyRef = inject(DestroyRef);
 
-  items: ContentListItem[] = [];
-  category: string = '';
+  // Convert route data and params to signals
+  private routeData = toSignal(this.route.data, { initialValue: {} });
+  private routeParams = toSignal(this.route.paramMap, { initialValue: null });
 
-  ngOnInit() {
-    this.route.data
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((data: any) => {
+  items = signal<ContentListItem[]>([]);
+  category = signal<string>('');
+
+  constructor() {
+    // Use effect to reactively update when route data or params change
+    effect(() => {
+      const data = this.routeData();
+      const paramMap = this.routeParams();
+
+      if (paramMap) {
+        // Get category from current route parameters
+        const categoryParam = paramMap.get('category') || '';
+        this.category.set(categoryParam);
+
         // Handle the case where data might be directly the items array (from original resolver)
         // or an object with items and category (from new resolver)
         if (Array.isArray(data)) {
-          this.items = data;
-          this.category = this.route.snapshot.paramMap.get('category') || '';
+          this.items.set(data);
         } else {
-          this.items = Array.isArray(data?.items) ? data.items : [];
-          this.category = data?.category || this.route.snapshot.paramMap.get('category') || '';
+          const items = Array.isArray((data as any)?.['items']) ? (data as any)['items'] : [];
+          this.items.set(items);
         }
-      });
+      }
+    });
   }
 }

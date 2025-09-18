@@ -1,38 +1,50 @@
-import { Component, inject, SecurityContext, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, SecurityContext, ChangeDetectionStrategy, computed, signal, effect } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MarkdownModule, MarkdownService, SANITIZE } from 'ngx-markdown';
 import { LinkComponent } from '../../../shared/components/link/link.component';
 import { Content } from '../../interfaces/content.interface';
+import { ThemeService } from '../../../shared/services/theme.service';
 
 @Component({
   imports: [MarkdownModule, RouterLink, LinkComponent],
-  providers: [
-    MarkdownService,
-    { provide: SANITIZE, useValue: SecurityContext.HTML },
-  ],
+  providers: [MarkdownService, { provide: SANITIZE, useValue: SecurityContext.HTML }],
   templateUrl: './content-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ContentPageComponent {
+  private themeService = inject(ThemeService);
   private route = inject(ActivatedRoute);
 
-  data!: Content;
-  id!: string;
-  date!: string;
-  title!: string;
-  category!: string;
-  aiEditor = false;
-  markdown!: string;
+  // Convert route data to signal
+  private routeData = toSignal(this.route.data, { initialValue: {} });
+
+  headerBgClasses = computed(() => this.themeService.isDarkMode() ? 'bg-base-300 text-content' : 'bg-base-content text-base-100');
+
+  // Convert properties to signals
+  data = signal<Content | null>(null);
+  id = signal<string>('');
+  date = signal<string>('');
+  title = signal<string>('');
+  category = signal<string>('');
+  aiEditor = signal<boolean>(false);
+  markdown = signal<string>('');
 
   constructor() {
-    this.route.data.subscribe((data) => {
-      this.data = data['content'] as Content;
-      this.id = this.data.frontmatter.id;
-      this.date = this.data.frontmatter.date;
-      this.title = this.data.frontmatter.title;
-      this.category = this.data.frontmatter.category;
-      this.aiEditor = this.data.frontmatter.aiEditor ?? false;
-      this.markdown = this.data.markdown;
+    // Use effect to reactively update when route data changes
+    effect(() => {
+      const data = this.routeData();
+      const content = (data as any)?.['content'] as Content;
+
+      if (content) {
+        this.data.set(content);
+        this.id.set(content.frontmatter.id);
+        this.date.set(content.frontmatter.date);
+        this.title.set(content.frontmatter.title);
+        this.category.set(content.frontmatter.category);
+        this.aiEditor.set(content.frontmatter.aiEditor ?? false);
+        this.markdown.set(content.markdown);
+      }
     });
   }
 }

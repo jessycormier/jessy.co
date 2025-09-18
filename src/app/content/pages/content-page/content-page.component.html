@@ -1,23 +1,23 @@
-<header class="bg-base-content text-base-100 font-mono text-content">
+<header class="{{headerBgClasses() }} font-mono">
   <div class="h-[1em]"></div>
   <div class="flex items-center justify-between gap-2">
     <div class="text-vertical">
-      <span class="px-2 text-base-100 uppercase">{{ id }}</span>
+      <span class="px-2 uppercase">{{ id() }}</span>
     </div>
     <div class="p-12">
-      <h1 class="text-2xl">{{ title }}</h1>
+      <h1 class="text-2xl">{{ title() }}</h1>
     </div>
   </div>
-  <div class="mr-2 text-right text-sm text-base-100/60">{{ date }}</div>
+  <div class="mr-2 text-right text-sm opacity-60">{{ date() }}</div>
 </header>
 
 <div class="prose-lg my-20">
-  <markdown [data]="markdown"></markdown>
+  <markdown [data]="markdown()"></markdown>
 </div>
 
 <footer class="flex items-center justify-between">
   <app-link [routerLink]="'../'">Back to Index</app-link>
-  @if (aiEditor) {
+  @if (aiEditor()) {
     <span class="cursor-help text-xs font-mono" title="This little badge is added when I had AI help edit the writing.">AI Reviewed</span>
   }
 </footer>
