@@ -53,8 +53,9 @@
               "optimization": {
                 "scripts": true,
                 "styles": {
+                  "removeSpecialComments": true,
                   "minify": true,
-                  "inlineCritical": true
+                  "inlineCritical": false
                 },
                 "fonts": true
               },

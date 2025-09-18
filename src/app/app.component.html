@@ -1,5 +1,7 @@
-<app-skip-to-main />
-<app-mask></app-mask>
-<div>
-  <router-outlet />
-</div>
+@if (isLoaded()) {
+  <app-skip-to-main />
+  <app-mask></app-mask>
+  <div>
+    <router-outlet />
+  </div>
+}
