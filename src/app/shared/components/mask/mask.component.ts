@@ -1,9 +1,10 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, signal, ChangeDetectionStrategy } from '@angular/core';
 import { LayoutService } from '../../services/layout.service';
 
 @Component({
   selector: 'app-mask',
   templateUrl: './mask.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MaskComponent {
   isShown = signal(false);
@@ -24,7 +25,7 @@ export class MaskComponent {
     if (!this.initialized()) {
       return 'opacity-0 pointer-events-none -z-50 fixed inset-0 max-w-full cursor-pointer bg-base-100/40 invisible';
     }
-    
+
     if (this.isShown()) {
       return 'opacity-100 z-10 fixed inset-0 max-w-full cursor-pointer bg-base-100/40 transition-all duration-300';
     } else {

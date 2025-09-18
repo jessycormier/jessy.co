@@ -1,9 +1,10 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-toast',
   imports: [],
   templateUrl: './toast.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastComponent {
 

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { BackToHomeButtonComponent } from '../../../shared/components/back-to-home-button/back-to-home-button.component';
 import { ToastComponent } from '../../../shared/components/toast/toast.component';
 import { ResumeDateRangeComponent } from '../../resume-date-range/resume-date-range.component';
@@ -21,6 +21,7 @@ type CategoryName = string;
     BackToHomeButtonComponent,
   ],
   templateUrl: './resume-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ResumePageComponent {
   highlightService = inject(HighlightService);

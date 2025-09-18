@@ -1,26 +1,24 @@
-import { Component, effect, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, effect, HostListener, ViewChild, ElementRef, ChangeDetectionStrategy, inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
 import { ContentService } from '../../../content/services/content.service';
 import { LayoutService } from '../../services/layout.service';
 import { LinkComponent } from '../link/link.component';
 
 @Component({
   selector: 'app-menu',
-  imports: [LinkComponent],
+  imports: [LinkComponent, AsyncPipe],
   templateUrl: './menu.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
   @ViewChild('menuDialog') menuDialog!: ElementRef<HTMLDialogElement>;
 
-  categories: {
-    name: string;
-    path: string;
-    count: number;
-  }[] = [];
+  private layout = inject(LayoutService);
+  private contentService = inject(ContentService);
 
-  constructor(private layout: LayoutService, contentService: ContentService) {
-    contentService
-      .getCategoryList()
-      .subscribe((categories) => (this.categories = categories));
+  categories$ = this.contentService.getCategoryList();
+
+  constructor() {
 
     effect(() => {
       const isMenuOpen = this.layout.menu();

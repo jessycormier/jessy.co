@@ -11,11 +11,11 @@
     "watch": "ng build --watch --configuration development",
     "content-index-builder": "vite-node ./scripts/content-index-builder.ts",
     "content-watch": "nodemon --watch public/content --ext md --exec \"npm run content-index-builder\"",
-    "precontent-watch":"npm run content-index-builder",
+    "precontent-watch": "npm run content-index-builder",
     "test": "ng test --no-watch --browsers ChromeHeadless",
     "test-watch": "ng test",
     "test-deep": "ng test --no-watch --browsers ChromeHeadless --code-coverage",
-    "dev": "http-server ./ -p 3000 -c-1",
+    "dev": "http-server ./dist/jessyco/browser -p 3000 -c-1",
     "format": "prettier --write ."
   },
   "private": true,
@@ -26,6 +26,7 @@
     "@angular/forms": "^20.3.0",
     "@angular/platform-browser": "^20.3.0",
     "@angular/router": "^20.3.0",
+    "@omnedia/ngx-highlighter": "^3.0.0",
     "@tailwindcss/postcss": "^4.1.13",
     "daisyui": "^5.1.12",
     "firacode": "^6.2.0",
@@ -38,6 +39,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-parse": "^11.0.0",
     "remark-stringify": "^11.0.0",
+    "rough-notation": "^0.5.1",
     "rxjs": "~7.8.0",
     "tailwindcss": "^4.1.13",
     "theme-change": "^2.5.0",
@@ -45,8 +47,7 @@
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vite-node": "^3.2.4",
-    "yaml": "^2.8.0",
-    "zone.js": "~0.15.0"
+    "yaml": "^2.8.0"
   },
   "devDependencies": {
     "@angular/build": "^20.3.1",

@@ -1,5 +1,8 @@
 <section class="prose-lg my-12 min-w-full">
-  <h1>Hi I'm Jessy.</h1>
+  <h1 class="text-base-content">
+    Hi I'm
+    <om-highlighter class="" [animationDuration]="1200" [iterations]="3" [action]="'underline'" [color]="highlightColor()"> Jessy </om-highlighter>
+  </h1>
 
   <p>
     Hey, thanks for stopping by. You've stumbled upon my personal site. I'll be using this space to ramble, dump thoughts, and write in things. I call these
@@ -7,6 +10,7 @@
   </p>
 
   <h2>Latest Logs</h2>
+
   @if (hasError()) {
     <!-- Error state -->
     <div role="alert" class="alert alert-error">

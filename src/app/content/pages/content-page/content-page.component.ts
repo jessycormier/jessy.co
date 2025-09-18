@@ -1,4 +1,4 @@
-import { Component, inject, SecurityContext } from '@angular/core';
+import { Component, inject, SecurityContext, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MarkdownModule, MarkdownService, SANITIZE } from 'ngx-markdown';
 import { LinkComponent } from '../../../shared/components/link/link.component';
@@ -11,6 +11,7 @@ import { Content } from '../../interfaces/content.interface';
     { provide: SANITIZE, useValue: SecurityContext.HTML },
   ],
   templateUrl: './content-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ContentPageComponent {
   private route = inject(ActivatedRoute);

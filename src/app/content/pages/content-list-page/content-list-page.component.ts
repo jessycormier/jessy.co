@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
@@ -9,6 +9,7 @@ import { ContentList } from '../../interfaces/content-list.interface';
   selector: 'app-content-list-page',
   imports: [ContentListItemComponent],
   templateUrl: './content-list-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ContentListPageComponent implements OnInit {
   private route = inject(ActivatedRoute);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IconsModule } from '../../icon.module';
 
@@ -6,5 +6,6 @@ import { IconsModule } from '../../icon.module';
   selector: 'app-back-to-home-button',
   imports: [RouterLink, IconsModule],
   templateUrl: './back-to-home-button.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BackToHomeButtonComponent {}

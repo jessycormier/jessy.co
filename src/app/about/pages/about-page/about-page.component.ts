@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgxTypedWriterModule } from 'ngx-typed-writer';
 
@@ -6,6 +6,7 @@ import { NgxTypedWriterModule } from 'ngx-typed-writer';
   selector: 'app-about-page',
   imports: [NgxTypedWriterModule, MarkdownModule],
   templateUrl: './about-page.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class AboutPageComponent implements OnInit {
   profileImage = 'profile/profile.jpg';

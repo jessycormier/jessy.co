@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
@@ -9,6 +9,7 @@ import { LayoutService } from '../../shared/services/layout.service';
   selector: 'app-standard-layout',
   imports: [RouterOutlet, FooterComponent, HeaderComponent, SidebarComponent],
   templateUrl: './standard-layout.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StandardLayoutComponent implements OnInit {
   nowYear = new Date().getFullYear();

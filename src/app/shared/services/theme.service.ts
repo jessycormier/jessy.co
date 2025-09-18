@@ -1,5 +1,72 @@
 import { Injectable, signal, computed } from '@angular/core';
-import { themeChange } from 'theme-change';
+// import * as themeChange from 'theme-change';
+
+// export function themeChange() {
+//   document.querySelectorAll('[data-set-theme]').forEach((el) => {
+//     el.addEventListener('click', function (this: HTMLElement) {
+//       const theme = this.getAttribute('data-set-theme');
+//       if (theme) {
+//         document.documentElement.setAttribute('data-theme', theme);
+//       }
+//     });
+//   });
+// }
+
+function themeToggle() {
+  var toggleEl = document.querySelector("[data-toggle-theme]");
+  var dataKey = toggleEl ? toggleEl.getAttribute('data-key') : null;
+  (function (theme = localStorage.getItem(dataKey ? dataKey : "theme")) {
+    if (localStorage.getItem(dataKey ? dataKey : "theme")) {
+      document.documentElement.setAttribute("data-theme", theme ?? '');
+      if (toggleEl) {
+        [...document.querySelectorAll("[data-toggle-theme]")].forEach((el) => {
+          const actClass = toggleEl ? toggleEl.getAttribute('data-act-class') : null;
+          if (actClass) {
+            el.classList.add(actClass);
+          }
+        });
+      }
+    }
+  })();
+  if (toggleEl) {
+    [...document.querySelectorAll("[data-toggle-theme]")].forEach((el) => {
+      el.addEventListener("click", function (this: HTMLElement) {
+        var themesList = el.getAttribute('data-toggle-theme');
+        if (themesList) {
+          var themesArray = themesList.split(",");
+          if (document.documentElement.getAttribute('data-theme') == themesArray[0]) {
+            if (themesArray.length == 1) {
+              document.documentElement.removeAttribute("data-theme");
+              localStorage.removeItem(dataKey ? dataKey : "theme");
+            }else{
+              document.documentElement.setAttribute("data-theme", themesArray[1]);
+              localStorage.setItem(dataKey ? dataKey : "theme", themesArray[1]);
+            }
+          } else {
+            document.documentElement.setAttribute("data-theme", themesArray[0]);
+            localStorage.setItem(dataKey ? dataKey : "theme", themesArray[0]);
+          }
+        }
+        [...document.querySelectorAll("[data-toggle-theme]")].forEach((el) => {
+          const actClass = this.getAttribute('data-act-class');
+          if (actClass) {
+            el.classList.toggle(actClass);
+          }
+        });
+      });
+    });
+  }
+}
+
+function themeChange(attach = true) {
+  if (attach === true) {
+    document.addEventListener("DOMContentLoaded", function (event) {
+      themeToggle()
+    })
+  }else{
+    themeToggle()
+  }
+}
 
 export type Theme = 'light' | 'dark';
 
