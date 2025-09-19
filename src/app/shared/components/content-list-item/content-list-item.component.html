@@ -8,9 +8,11 @@
     <div class="flex-1">
       <div class="font-mono text-sm leading-tight tracking-wider group-hover: transition">{{ item().title }}</div>
     </div>
-    <span class="font-mono text-xs text-secondary-content opacity-90 transform transition group-hover:translate-x-1">
-      {{ item().date | date: 'MMM d, y' }}
-    </span>
+    @if (item().date && item().date.trim() !== '') {
+      <span class="font-mono text-xs text-secondary-content opacity-90 transform transition group-hover:translate-x-1">
+        {{ item().date | date: 'MMM d, y' }}
+      </span>
+    }
   </a>
 } @else if (state() === ComponentState.Loading) {
   <div role="status" class="animate-pulse w-full">

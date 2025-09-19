@@ -3,4 +3,5 @@ export interface MarkdownItem {
   date: string;
   title: string;
   path: string;
+  filename: string; // Add filename for sorting fallback
 }

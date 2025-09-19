@@ -1,5 +1,5 @@
 import { Injectable, Renderer2, RendererFactory2, signal, inject } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 import { ThemeService } from './theme.service';
 
 /**
@@ -31,13 +31,25 @@ export class LayoutService {
         let breadcrumb = event.url.split('/').filter((s) => s.length > 0);
         if (event.url === '/') {
           breadcrumb = ['home'];
-        }
+        } else if (event.url === '/log') {
+          breadcrumb = ['logs']; // Display "logs" when viewing /log page
+        } else {
+          // Transform breadcrumbs for better display
+          breadcrumb = breadcrumb.map((item, index) => {
+            // Convert 'logs' to readable format but keep the structure
+            if (item === 'logs') {
+              return 'logs';
+            }
+            // For post URLs, convert hyphens to spaces for better readability
+            if (index > 1) { // Anything after logs/category is likely a post
+              return item.replace(/-/g, ' ');
+            }
+            // Keep category names as they are
+            return item;
+          });
 
-        // Split out the last item for now for visual reasons.
-        // I may want to create slots for each visual part so I can better
-        // control what shows on different screen sizes..
-        if (breadcrumb.length === 2) {
-          breadcrumb = breadcrumb.slice(0, 1);
+          // Don't truncate breadcrumbs - show the full path for posts
+          // This allows showing: logs / thoughts / post-name
         }
 
         this.breadcrumb.set(breadcrumb);

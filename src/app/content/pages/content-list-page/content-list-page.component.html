@@ -1,30 +1,68 @@
-<header class="my-12">
-  <div class="flex items-end justify-between border-b border-base-300 pb-4">
-    <div>
-      <h1 class="text-4xl font-bold capitalize text-base-content">{{ category() }}</h1>
-      <p class="mt-2 text-base-content/70">
-        {{ items().length }} {{ items().length === 1 ? 'item' : 'items' }} available
-      </p>
-    </div>
-    <div class="text-right">
-      <div class="stats stats-horizontal">
-        <div class="stat">
-          <div class="stat-title">Total Posts</div>
-          <div class="stat-value text-2xl">{{ items().length }}</div>
-        </div>
+<div class="prose-lg">
+  <header class="my-12">
+    <h1 class="text-4xl font-bold capitalize text-base-content relative">
+      @if (isRootLogPage()) {
+        Logs
+      } @else {
+        {{ category() }}
+      }
+      @if (!isRootLogPage() && category()) {
+        <button class="absolute top-3.5 -left-8 cursor-pointer text-sm opacity-60 hover:opacity-100 transition-opacity" [routerLink]="'/log'">
+          <lucide-icon name="ArrowLeft" size="18"></lucide-icon>
+        </button>
+      }
+    </h1>
+    <div class="flex items-end justify-between border-b border-base-300">
+      <div class="">
+        @if (isRootLogPage()) {
+          <div class="text-base-content/70">
+            @if (isRootLogPage()) {
+              {{ items().length }} recent {{ items().length === 1 ? 'log' : 'logs' }}
+              @if (categories().length > 0) {
+                · {{ categories().length }} {{ categories().length === 1 ? 'category' : 'categories' }}
+              }
+            } @else {
+              {{ items().length }} {{ items().length === 1 ? 'item' : 'items' }} available
+            }
+          </div>
+        }
+      </div>
+      <div class="text-right">
+        <div class="stat-title">Total Logs</div>
+        <div class="stat-value text-2xl">{{ items().length }}</div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<main class="mt-10">
-  @if (items().length === 0) {
-    <div class="text-center py-12">
-      <div class="text-base-content/50 text-lg">No items found in this category</div>
-    </div>
-  } @else {
-    @for (item of items(); track $index) {
-      <app-content-list-item [item]="item"></app-content-list-item>
-    }
+  <!-- Categories section - only show on root log page -->
+  @if (isRootLogPage() && categories().length > 0) {
+    <section class="mb-8">
+      <h2 class="font-semibold mb-4 text-base-content">Categories</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        @for (category of categories(); track category.path) {
+          <a [routerLink]="'/' + category.path" class="card bg-base-200 hover:bg-base-300 transition-colors duration-200 p-4 text-center group">
+            <div class="card-body p-0">
+              <h3 class="text-base font-medium capitalize text-base-content group-hover:text-primary">
+                {{ category.name }}
+              </h3>
+              <p class="text-sm text-base-content/60 mt-1">{{ category.count }} {{ category.count === 1 ? 'log' : 'logs' }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </section>
   }
-</main>
+
+  <section class="mt-10">
+    <h2 class="text-xl font-semibold mb-4 text-base-content">List</h2>
+    @if (items().length === 0) {
+      <div class="text-center py-12">
+        <div class="text-base-content/50 text-lg">No items found in this category</div>
+      </div>
+    } @else {
+      @for (item of items(); track $index) {
+        <app-content-list-item [item]="item"></app-content-list-item>
+      }
+    }
+  </section>
+</div>

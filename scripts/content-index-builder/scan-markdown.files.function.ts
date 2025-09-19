@@ -28,7 +28,10 @@ export async function scanMarkdownFiles(rootDir: string): Promise<CategoriesAndL
       name: 'log',
       path: routePath,
       count: rootItems.length,
-      items: rootItems.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id)),
+      items: rootItems.sort((a, b) => {
+        // Sort by filename alphabetically for regular category items
+        return a.filename.localeCompare(b.filename);
+      }),
     });
   }
 
@@ -46,10 +49,24 @@ export async function scanMarkdownFiles(rootDir: string): Promise<CategoriesAndL
       name: name,
       path: routePath,
       count: items.length,
-      items: items.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id)),
+      items: items.sort((a, b) => {
+        // Sort by filename alphabetically for regular category items
+        return a.filename.localeCompare(b.filename);
+      }),
     });
   }
-  const sortedItems = allItems.sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id));
+  // For "latest" items, keep the date-based sorting (when date is available)
+  const sortedItems = allItems.sort((a, b) => {
+    // If both have dates, sort by date (newest first)
+    if (a.date && b.date) {
+      return b.date.localeCompare(a.date);
+    }
+    // If only one has a date, prioritize the one with date
+    if (a.date && !b.date) return -1;
+    if (!a.date && b.date) return 1;
+    // If neither has date, sort by filename
+    return a.filename.localeCompare(b.filename);
+  });
 
   return {
     categories,

@@ -16,11 +16,28 @@ export class HeaderComponent {
 
   getBreadcrumbUrl(index: number): string {
     const breadcrumbs = this.layout.breadcrumb();
+
     if (index === 0) {
-      // First item 'log' redirects to root
+      // First item handling
+      if (breadcrumbs[0] === 'home') {
+        return '/';
+      } else if (breadcrumbs[0] === 'logs') {
+        return '/log'; // "logs" breadcrumb links to /log page
+      }
       return '/';
     }
-    // Build cumulative path: /log/thoughts, /log/thoughts/cool-stuff, etc.
-    return '/' + breadcrumbs.slice(0, index + 1).join('/');
+
+    // Build cumulative path for deeper levels
+    const pathSegments = breadcrumbs.slice(0, index + 1);
+
+    // Build the correct URL path
+    const urlSegments = pathSegments.map((segment, i) => {
+      if (segment === 'logs' && i === 0) {
+        return 'logs'; // Keep as 'logs' for category URLs
+      }
+      return segment;
+    });
+
+    return '/' + urlSegments.join('/');
   }
 }

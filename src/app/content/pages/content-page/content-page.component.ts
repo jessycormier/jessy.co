@@ -40,7 +40,19 @@ export default class ContentPageComponent {
         this.data.set(content);
         this.id.set(content.frontmatter.id);
         this.date.set(content.frontmatter.date);
-        this.title.set(content.frontmatter.title);
+
+        // Use title from frontmatter, or fallback to filename from URL
+        let title = content.frontmatter.title;
+        if (!title || title.trim() === '') {
+          // Extract filename from current route
+          const urlSegments = this.route.snapshot.url;
+          if (urlSegments.length > 0) {
+            const filename = urlSegments[urlSegments.length - 1].path;
+            title = filename.replace(/-/g, ' '); // Convert hyphens to spaces
+          }
+        }
+        this.title.set(title);
+
         this.category.set(content.frontmatter.category);
         this.aiEditor.set(content.frontmatter.aiEditor ?? false);
         this.markdown.set(content.markdown);
