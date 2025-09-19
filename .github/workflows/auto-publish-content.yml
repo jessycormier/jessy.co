@@ -1,5 +1,8 @@
 name: Auto Publish Content Branch
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
