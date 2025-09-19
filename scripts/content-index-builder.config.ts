@@ -9,6 +9,8 @@ export default {
     '.git',
     'node_modules',
     '.DS_Store',
-    'Thumbs.db'
+    'Thumbs.db',
+    '**/_*',
+    '_*'
   ]
 };

@@ -7,6 +7,9 @@
 public/content.json
 public/routes.txt
 
+# Obsidian
+.obsidian/
+**/content/**/_*
 
 # Compiled output
 /dist
@@ -27,7 +30,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
-.obsidian/
+
 
 # Visual Studio Code
 .vscode/*
