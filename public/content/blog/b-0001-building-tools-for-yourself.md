@@ -1,8 +1,7 @@
 ---
 id: "b-0001"
 title: "Building tools for yourself"
-date: "2025-03-2"
-category: "blog"
+date: 2025-03-2
 description: "Why I choose to build personal tools instead of using existing solutions, and what I've learned along the way about the balance between learning and productivity."
 keywords: "personal tools, side projects, development, learning, productivity, project management"
 ---

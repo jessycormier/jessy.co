@@ -1,8 +1,7 @@
 ---
 id: "t-0003"
 title: "perfect"
-date: "2025-02-19"
-category: "thoughts"
+date: 2025-02-19
 description: "Reflections on the pursuit of perfection and learning to embrace the messy, imperfect nature of life and work. Sometimes raw and unpolished has more value than prim and proper."
 keywords: "perfectionism, balance, personal growth, philosophy, voltaire, excellence vs perfection, mindfulness"
 ---

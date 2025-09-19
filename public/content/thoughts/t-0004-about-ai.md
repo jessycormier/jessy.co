@@ -1,8 +1,7 @@
 ---
 id: "t-0004"
 title: "About AI"
-date: "2025-06-17"
-category: "thoughts"
+date: 2025-06-17
 aiEditor: true
 description: "My perspective on using AI as a writing tool to overcome creative roadblocks and transform ideas into structured, readable content without losing authenticity."
 keywords: "AI, artificial intelligence, writing tools, content creation, AI editing, productivity, writing workflow"

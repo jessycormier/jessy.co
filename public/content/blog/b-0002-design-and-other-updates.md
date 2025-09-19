@@ -1,8 +1,7 @@
 ---
 id: "b-0002"
 title: "Website update"
-date: "2025-09-17"
-category: "blog"
+date: 2025-09-17
 description: "Details on the website's design updates, including DaisyUI integration, theming improvements, and developer experience enhancements."
 keywords: "site update, DaisyUI, theming, developer experience, Tailwind, content-index-builder"
 ---

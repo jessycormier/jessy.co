@@ -33,6 +33,20 @@ export const routes: Routes = [
         loadComponent: () => import('./content/pages/content-page/content-page.component'),
       },
       {
+        path: 'log',
+        canActivate: [contentGuard],
+        resolve: { items: contentResolver },
+        title: 'Log | Jessy.co',
+        loadComponent: () => import('./content/pages/content-list-page/content-list-page.component'),
+      },
+      {
+        path: 'log/:id',
+        canActivate: [contentGuard],
+        resolve: { content: contentResolver },
+        title: 'Log | Jessy.co',
+        loadComponent: () => import('./content/pages/content-page/content-page.component'),
+      },
+      {
         path: 'logs/:category',
         canActivate: [contentGuard],
         resolve: { items: contentResolver },

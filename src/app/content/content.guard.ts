@@ -9,9 +9,32 @@ export const contentGuard: CanActivateFn = (route) => {
 
   const category = route.paramMap.get('category') || '';
   const id = route.paramMap.get('id');
+  const isLogRoute = route.routeConfig?.path === 'log' || route.routeConfig?.path === 'log/:id';
 
+  // Handle /log/:id route
+  if (isLogRoute && id) {
+    return contentService.getContent('log', id).pipe(
+      map(() => true), // Content exists, allow navigation
+      catchError((error) => {
+        console.error(`Content guard: Log content not found for ${id}:`, error);
+        router.navigate(['/error/not-found']);
+        return of(false); // Prevent navigation
+      })
+    );
+  }
+  // Handle /log route (category list)
+  else if (isLogRoute && !id) {
+    return contentService.getCategory('log').pipe(
+      map(() => true), // Category exists, allow navigation
+      catchError((error) => {
+        console.error(`Content guard: Log category not found:`, error);
+        router.navigate(['/error/not-found']);
+        return of(false); // Prevent navigation
+      })
+    );
+  }
   // Post
-  if (category && id) {
+  else if (category && id) {
     return contentService.getContent(category, id).pipe(
       map(() => true), // Content exists, allow navigation
       catchError((error) => {

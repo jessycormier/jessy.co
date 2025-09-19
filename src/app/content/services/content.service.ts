@@ -14,8 +14,11 @@ export class ContentService {
   private unifiedService = inject(UnifiedService);
 
   getContent(category: string, id: string) {
+    // Handle special 'log' category which stores files in the root content directory
+    const filePath = category === 'log' ? `content/${id}.md` : `content/${category}/${id}.md`;
+
     return this.http
-      .get(`content/${category}/${id}.md`, { responseType: 'text' })
+      .get(filePath, { responseType: 'text' })
       .pipe(
         timeout(10000), // 10 second timeout
         retry(2), // Retry up to 2 times
@@ -32,8 +35,10 @@ export class ContentService {
   getCategory(category: string) {
     return this.getContentIndex().pipe(
       map((json) => {
+        // Handle special 'log' category with direct path
+        const categoryPath = category === 'log' ? 'log' : `logs/${category}`;
         const categoryData = json.categories.find(
-          (c) => c.path === `logs/${category}`
+          (c) => c.path === categoryPath
         );
         if (!categoryData) {
           throw new Error(`Category not found: ${category}`);

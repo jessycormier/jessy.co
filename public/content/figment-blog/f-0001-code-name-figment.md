@@ -1,8 +1,7 @@
 ---
 id: "f-0001"
 title: "Code name Figment"
-date: "2025-06-2"
-category: "figment-blog"
+date: 2025-06-2
 aiEditor: true
 description: "The origin story of Figment - a personal tool that grew from managing household items for insurance into a flexible system for tracking things, images, bookmarks, games, and projects with connected relationships."
 keywords: "figment, personal project, project management, digital organization, household inventory, tagging system, connected data"

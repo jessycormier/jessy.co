@@ -2,7 +2,6 @@
 id: b-0003
 title: writing system update
 date: 2025-09-18
-category: blog
 description: ""
 tags: []
 ---

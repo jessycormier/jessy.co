@@ -10,8 +10,17 @@ export const contentResolver: ResolveFn<any | null> = (route) => {
 
   const category = route.paramMap.get('category') || '';
   const id = route.paramMap.get('id');
+  const isLogRoute = route.routeConfig?.path === 'log' || route.routeConfig?.path === 'log/:id';
 
-  if (category && id) {
+  if (isLogRoute && id) {
+    // Handle /log/:id route
+    return contentService.getContent('log', id);
+  }
+  else if (isLogRoute && !id) {
+    // Handle /log route (category list)
+    return contentService.getCategory('log');
+  }
+  else if (category && id) {
     return contentService.getContent(category, id);
   }
   else if (category && !id) {
