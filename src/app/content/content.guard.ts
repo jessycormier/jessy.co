@@ -19,7 +19,7 @@ export const contentGuard: CanActivateFn = (route) => {
         console.error(`Content guard: Log content not found for ${id}:`, error);
         router.navigate(['/error/not-found']);
         return of(false); // Prevent navigation
-      })
+      }),
     );
   }
   // Handle /log route (category list)
@@ -30,7 +30,7 @@ export const contentGuard: CanActivateFn = (route) => {
         console.error(`Content guard: Log category not found:`, error);
         router.navigate(['/error/not-found']);
         return of(false); // Prevent navigation
-      })
+      }),
     );
   }
   // Post
@@ -41,7 +41,7 @@ export const contentGuard: CanActivateFn = (route) => {
         console.error(`Content guard: Content not found for ${category}/${id}:`, error);
         router.navigate(['/error/not-found']);
         return of(false); // Prevent navigation
-      })
+      }),
     );
   }
   // Category
@@ -52,7 +52,7 @@ export const contentGuard: CanActivateFn = (route) => {
         console.error(`Content guard: Category not found for ${category}:`, error);
         router.navigate(['/error/not-found']);
         return of(false); // Prevent navigation
-      })
+      }),
     );
   }
 

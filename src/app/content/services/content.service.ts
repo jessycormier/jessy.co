@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { catchError, map, throwError, of, retry, timeout } from 'rxjs';
+import { catchError, map, of, retry, throwError, timeout } from 'rxjs';
 import { UnifiedService } from '../../shared/services/unified.service';
 
 @Injectable({
@@ -17,19 +17,15 @@ export class ContentService {
     // Handle special 'log' category which stores files in the root content directory
     const filePath = category === 'log' ? `content/${id}.md` : `content/${category}/${id}.md`;
 
-    return this.http
-      .get(filePath, { responseType: 'text' })
-      .pipe(
-        timeout(10000), // 10 second timeout
-        retry(2), // Retry up to 2 times
-        map((markdown) => {
-          const parsedMarkdown = this.unifiedService.parseMarkdown(
-            markdown
-          ) || { frontmatter: null, markdown: null };
-          return parsedMarkdown || { frontmatter: null, markdown: null };
-        }),
-        catchError((error) => this.handleContentError(error, 'content'))
-      );
+    return this.http.get(filePath, { responseType: 'text' }).pipe(
+      timeout(10000), // 10 second timeout
+      retry(2), // Retry up to 2 times
+      map((markdown) => {
+        const parsedMarkdown = this.unifiedService.parseMarkdown(markdown) || { frontmatter: null, markdown: null };
+        return parsedMarkdown || { frontmatter: null, markdown: null };
+      }),
+      catchError((error) => this.handleContentError(error, 'content')),
+    );
   }
 
   getCategory(category: string) {
@@ -37,15 +33,13 @@ export class ContentService {
       map((json) => {
         // Handle special 'log' category with direct path
         const categoryPath = category === 'log' ? 'log' : `logs/${category}`;
-        const categoryData = json.categories.find(
-          (c) => c.path === categoryPath
-        );
+        const categoryData = json.categories.find((c) => c.path === categoryPath);
         if (!categoryData) {
           throw new Error(`Category not found: ${category}`);
         }
         return Array.isArray(categoryData.items) ? categoryData.items : [];
       }),
-      catchError((error) => this.handleContentError(error, 'category'))
+      catchError((error) => this.handleContentError(error, 'category')),
     );
   }
 
@@ -60,7 +54,7 @@ export class ContentService {
         console.error('Failed to load category list:', error);
         // Return empty array instead of navigating to error page
         return of([]);
-      })
+      }),
     );
   }
 
@@ -71,7 +65,7 @@ export class ContentService {
         console.error('Failed to load latest posts:', error);
         // Return empty array instead of navigating to error page
         return of([]);
-      })
+      }),
     );
   }
 
@@ -83,7 +77,7 @@ export class ContentService {
       }>(`content.json`, { responseType: 'json' })
       .pipe(
         timeout(10000), // 10 second timeout
-        retry(2) // Retry up to 2 times for network issues
+        retry(2), // Retry up to 2 times for network issues
       );
   }
 

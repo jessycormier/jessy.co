@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ContentListItemComponent } from '../../../shared/components/content-list-item/content-list-item.component';
+import { IconsModule } from '../../../shared/icon.module';
 import { ContentListItem } from '../../interfaces/content-list-item.interface';
 import { ContentService } from '../../services/content.service';
-import { LinkComponent } from "../../../shared/components/link/link.component";
-import { IconsModule } from '../../../shared/icon.module';
 
 @Component({
   selector: 'app-content-list-page',
-  imports: [ContentListItemComponent, RouterLink, LinkComponent, IconsModule],
+  imports: [ContentListItemComponent, RouterLink, IconsModule],
   templateUrl: './content-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

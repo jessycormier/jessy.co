@@ -1,8 +1,9 @@
 import { Component, EventEmitter, HostBinding, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { IconsModule } from '../../icon.module';
 
 @Component({
   selector: 'app-toast',
-  imports: [],
+  imports: [IconsModule],
   templateUrl: './toast.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
