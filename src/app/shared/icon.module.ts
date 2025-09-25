@@ -12,6 +12,10 @@ import {
   LucideAngularComponent,
   LucideAngularModule,
   Frown,
+  NotebookText,
+  SquareUser,
+  FileUser,
+  Scroll,
 } from 'lucide-angular';
 
 @NgModule({
@@ -27,6 +31,10 @@ import {
       Sun,
       X,
       TriangleAlert,
+      NotebookText,
+      SquareUser,
+      FileUser,
+      Scroll
     }),
   ],
   exports: [LucideAngularComponent],

@@ -213,7 +213,7 @@ body {
 
 @layer components {
   /* Link Component - Used on resume page */
-  .link {
+  .resume-link {
     @apply p-0 hover:px-2;
     @apply transition-all;
     @apply text-base-content hover:bg-base-100 hover:text-base-100;

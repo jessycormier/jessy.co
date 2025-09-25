@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { LinkComponent } from '../link/link.component';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { BrandComponent } from '../brand/brand.component';
+import { IconsModule } from '../../icon.module';
 
 @Component({
   selector: 'app-footer',
-  imports: [LinkComponent],
+  imports: [BrandComponent, RouterLink, IconsModule],
   templateUrl: './footer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
