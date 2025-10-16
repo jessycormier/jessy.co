@@ -25,6 +25,11 @@ export const routes: Routes = [
         title: 'Resume | Jessy.co',
         loadComponent: () => import('./resume/pages/resume-page/resume-page.component'),
       },
+      // This is to handle old consulting URL redirect to about.
+      {
+        path: 'consulting',
+        redirectTo: '',
+      },
       {
         path: 'logs/:category/:id',
         canActivate: [contentGuard],
